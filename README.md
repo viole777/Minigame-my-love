@@ -19,7 +19,7 @@ Abra `index.html` num navegador moderno. GitHub Pages publica o projeto como sit
 
 ## Limitações honestas
 
-- A personagem é um sprite placeholder original feito de pixels desenhados no canvas, não um spritesheet de personagem licenciado. O cenário e o tilemap também são desenhados por código; nenhum pacote externo de sprites foi incorporado nesta revisão.
+- A personagem usa um spritesheet original de 3 colunas × 4 direções em `assets/mio-sprites.svg`. O cenário e o tilemap são desenhados por código; nenhum pacote externo de tileset licenciado foi incorporado nesta revisão.
 - Os IDs do YouTube não foram verificados individualmente em reprodução real. A API lida com eventos de erro quando são reportados, mas algumas restrições de vídeo podem variar por região/conta.
 - Não foi possível testar o jogo num celular físico nesta sessão. A validação automática confere estrutura, IDs, integração declarada e sintaxe JS, não substitui teste visual/manual.
 - Os três poemas antigos precisam dos textos originais antes de serem adicionados.
