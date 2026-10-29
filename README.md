@@ -1,30 +1,27 @@
 # Cantinho da Mio
 
-Jogo de exploração em pixel art, mobile-first, num quarto noturno. A cena é um canvas de baixa resolução (320×180) escalado com pixelização; o jogador pode andar com setas/WASD ou D-pad e interagir com janela, estante, rádio, caderno, mesa e segredos.
+Jogo de exploração e pequenos enigmas em pixel art, com uma cena fixa de **320×240**, personagem com spritesheet PNG, inventário de quatro espaços visíveis e controles adaptados a celular e desktop.
 
-## Abrir e publicar
+## Assets e execução
 
-Abra `index.html` num navegador moderno. GitHub Pages publica o projeto como site estático, sem etapa de build ou dependências de pacote.
+- `scripts/generate_assets.py` gera PNGs de arte original, pixel a pixel, usando apenas a biblioteca padrão do Python.
+- `assets/room.png`, `assets/mio.png`, `assets/rain.png` e `assets/inventory.png` são gerados no workflow de validação e antes do deploy de GitHub Pages.
+- Para testar localmente: `python3 scripts/generate_assets.py` e abra `index.html` por um servidor estático local. O `fetch()` dos poemas pode falhar se abrir como `file://`; use um servidor local.
+- GitHub Pages é publicado como site estático, sem build de framework ou dependências npm.
 
-## Recursos
+## Controles
 
-- Exploração do quarto em canvas, movimento em quatro direções e colisão com paredes/móveis.
-- Janela com chuva/estrelas e luz pulsante; animação reduzida quando `prefers-reduced-motion` está ativo.
-- Diálogo de RPG com efeito de escrita, botão para revelar o texto completo e escolhas simples.
-- Controles por teclado e D-pad de toque, interação por proximidade, painel que fecha com Esc/B/X e retorno à posição anterior.
-- Rádio usando a YouTube IFrame Player API: começa após o primeiro gesto do jogador, avança ao terminar, tenta pular erros, oferece play/pause e links de pesquisa no YouTube.
-- Caderno com os quatro poemas completos do documento mestre. Os três antigos permanecem reservados.
-- Estante, Arquivo dos Caçadores e scrapbook com adesivos móveis.
-- Sem analytics, sem coleta de dados, sem pontuação ou game over.
+- Toque/click num objeto para caminhar até ele; setas/WASD ou D-pad para mover.
+- Toque em item do inventário para selecioná-lo e depois toque num objeto para tentar combiná-los.
+- **Home** fecha painéis; **Hint** destaca visualmente o próximo objeto; **Sound** liga/desliga a música; **Pause** pausa movimento e música.
+- O caderno abre ao interagir com o caderno na escrivaninha. Páginas são desbloqueadas por pequenos enigmas.
+- O rádio usa YouTube IFrame Player API, começa após gesto do jogador e tenta avançar no fim/erro. A reprodução real pode depender de disponibilidade regional e das restrições do YouTube.
 
-## Limitações honestas
+## Conteúdo e limitações
 
-- A personagem usa um spritesheet original de 3 colunas × 4 direções em `assets/mio-sprites.svg`. O cenário e o tilemap são desenhados por código; nenhum pacote externo de tileset licenciado foi incorporado nesta revisão.
-- Os IDs do YouTube não foram verificados individualmente em reprodução real. A API lida com eventos de erro quando são reportados, mas algumas restrições de vídeo podem variar por região/conta.
-- Não foi possível testar o jogo num celular físico nesta sessão. A validação automática confere estrutura, IDs, integração declarada e sintaxe JS, não substitui teste visual/manual.
-- Os três poemas antigos precisam dos textos originais antes de serem adicionados.
-- O scrapbook não salva conteúdo depois que a página é fechada.
-
-## Privacidade e acessibilidade
-
-Não há analytics nem armazenamento remoto. A interface inclui foco visível, rótulos, controles de toque e teclado, áreas de toque grandes e suporte a movimento reduzido.
+- Os quatro poemas completos estão separados em `content/poems/poems.json` e o texto é preservado sem reescrita intencional.
+- Os três arquivos antigos estão vazios porque o documento mestre só contém marcadores para inserir os originais. O jogo mostra `[texto original a inserir]` sem inventar versos.
+- O Arquivo dos Caçadores e o Scrapbook antigos foram removidos do caminho principal para priorizar a mecânica de exploração e enigmas solicitada.
+- A arte do quarto, móveis, personagem, chuva e ícones é placeholder original gerado por script; não foi copiado nenhum sprite do Undertale ou de outro jogo. É uma primeira versão funcional de pixel art, não arte final detalhada.
+- A validação automatizada verifica sintaxe, dimensões e estrutura dos PNGs. Ela não substitui testes visuais em celular/desktop; a reprodução real de todas as faixas não pode ser garantida sem executar os vídeos em navegador.
+- Não há analytics, pontuação, cronômetro, game over nem envio de dados pessoais.
