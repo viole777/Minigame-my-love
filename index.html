@@ -22,8 +22,8 @@ function inspect(id){if(id==="window"){if(!flags.has(id)){flags.add(id);add("flo
 if(id==="bed"){if(!flags.has(id)){flags.add(id);add("key")}else if(selected==="flower"){take("flower");unlock(2)}else say("O cobertor está cuidadosamente dobrado.")}
 if(id==="dresser"){if(selected==="key"&&!flags.has("drawer")){take("key");flags.add("drawer");add("cassette");unlock(1);say("A gaveta abriu. Você encontrou uma fita.")}else say(flags.has("drawer")?"A gaveta está aberta.":"A gaveta está trancada.")}
 if(id==="shelf"){if(!flags.has(id)){flags.add(id);add("note");unlock(4)}else if(selected==="note"){take("note");unlock(5)}else say("Os livros escondem marcas na madeira.")}
-if(id==="desk"){if(selected==="note"){take("note");unlock(6)}else if(!flags.has(id)){flags.add(id);add("note")}else say("Só restam marcas de tinta sobre a mesa.")}
-if(id==="notebook"){renderPoems();show("poemsPanel")}if(id==="radio"){renderTracks();show("radioPanel");if(items.includes("cassette"))unlock(7)}inventory()}
+if(id==="desk"){if(selected==="note"){take("note");unlock(5);unlock(6)}else if(!flags.has(id)){flags.add(id);add("note")}else say("Só restam marcas de tinta sobre a mesa.")}
+if(id==="notebook"){renderPoems();show("poemsPanel")}if(id==="radio"){renderTracks();show("radioPanel");if(items.includes("cassette")){unlock(3);unlock(7)}}inventory()}
 function object(id){active=id;const d=defs[id];$("#objectTitle").textContent=d[0].toUpperCase();$("#objectArt").textContent=d[1];$("#objectDescription").textContent=d[2];$("#objectAction").textContent=id==="radio"?"Abrir rádio":id==="notebook"?"Abrir caderno":"Investigar";show("objectPanel")}
 function action(){const id=active;if(!id)return;close();inspect(id)}
 $$("[data-o]").forEach(b=>b.onclick=()=>object(b.dataset.o));$("#objectAction").onclick=action;
