@@ -29,7 +29,13 @@ jobs:
         with:
           enablement: true
 
-      - name: Generate PNG game assets
+      - name: Download Kenney CC0 indoor sprites
+        run: |
+          mkdir -p assets/kenney-indoor
+          curl -L --fail --retry 3 "https://opengameart.org/sites/default/files/Roguelike%20Indoor%20pack.zip" -o /tmp/kenney-indoor.zip
+          unzip -o /tmp/kenney-indoor.zip -d assets/kenney-indoor
+          find assets/kenney-indoor -maxdepth 2 -type f
+      - name: Generate remaining game PNG assets
         run: python3 scripts/generate_assets.py
 
       - name: Upload static site
