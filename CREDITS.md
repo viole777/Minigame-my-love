@@ -2,14 +2,19 @@
 
 ## Arte original deste projeto
 
-- `assets/mio-sprites.svg`: spritesheet original de placeholder da Mio, criado para este projeto. Grade 3 colunas × 4 direções; cada frame mede 16×24 px. Não deriva de personagens ou sprites de jogos comerciais.
-- **Tilemap, quarto, móveis, janela e efeitos:** formas de pixel desenhadas por código no `index.html`, criadas especificamente para este projeto.
-- **Pacote de tileset externo:** ainda não incorporado. O tilemap atual usa tiles originais desenhados por código, não arquivos de um pacote externo com licença CC0.
+Todos os PNGs são gerados por `scripts/generate_assets.py`, escrito para este repositório e usando apenas Python padrão. O script escreve os pixels diretamente em buffers raster com uma paleta limitada; não usa SVG, emojis, gradientes CSS nem assets de jogos comerciais.
+
+- `assets/room.png` — quarto completo 320×240, piso de madeira, parede padronizada, cama, armário, estante, escrivaninha, rádio e pequenos objetos.
+- `assets/mio.png` — spritesheet original de personagem 16×24, 3 frames por 4 direções.
+- `assets/rain.png` — quatro frames de chuva.
+- `assets/inventory.png` — ícones pixelados do inventário.
+
+Esses PNGs são arte original placeholder, não sprites profissionais ou assets de pacotes externos. Não foram copiados tiles, sprites, personagens, cenas ou logos do Undertale, Supernatural ou outras franquias. Referências de estilo serviram apenas como guia de composição.
 
 ## Dependência externa
 
-- **YouTube IFrame Player API** — carregada a partir de `https://www.youtube.com/iframe_api` para reproduzir as faixas após gesto do usuário. Consulte: https://developers.google.com/youtube/iframe_api_reference
+- YouTube IFrame Player API — carregada em runtime para a reprodução de músicas. Documentação: https://developers.google.com/youtube/iframe_api_reference
 
-## Nota de licença
+## Licença
 
-Os assets visuais listados acima são originais deste projeto e não têm atribuição de terceiros. O requisito de incorporar um pacote externo de sprites/tileset com licença livre ainda está pendente; não vou declarar Kenney, OpenGameArt ou outro pacote como usado sem ter efetivamente incorporado e conferido os arquivos exatos.
+A arte original gerada por este projeto pode ser reutilizada com atribuição ao repositório. Nenhum pacote externo CC0 foi incorporado; portanto, não há atribuições de terceiros a declarar.
