@@ -27,7 +27,7 @@ jobs:
           for name, size in expected.items():
               p = Path("assets") / name
               data = p.read_bytes()
-              assert data[:8] == b"\\x89PNG\\r\\n\\x1a\\n", f"{name} is not a PNG"
+              assert data[:8] == b"\x89PNG\r\n\x1a\n", f"{name} is not a PNG"
               dims = struct.unpack(">II", data[16:24])
               assert dims == size, f"{name}: expected {size}, got {dims}"
           print("PNG assets valid:", ", ".join(expected))
@@ -40,18 +40,18 @@ jobs:
           const assert = require('node:assert/strict');
           const html = fs.readFileSync('index.html', 'utf8');
           assert.match(html, /<canvas[^>]*width="320"[^>]*height="240"/i, 'Canvas must be 320x240');
-          assert.match(html, /image-rendering:\\s*pixelated/i, 'Pixel scaling missing');
-          assert.match(html, /assets\\/room\\.png/, 'Room PNG must be loaded');
-          assert.match(html, /assets\\/mio\\.png/, 'Character PNG must be loaded');
+          assert.match(html, /image-rendering:\s*pixelated/i, 'Pixel scaling missing');
+          assert.match(html, /assets\/room\.png/, 'Room PNG must be loaded');
+          assert.match(html, /assets\/mio\.png/, 'Character PNG must be loaded');
           assert.match(html, /YouTubeIframeAPIReady/, 'YouTube API callback missing');
-          assert.match(html, /YT\\.PlayerState\\.ENDED/, 'Playlist must advance on ENDED');
+          assert.match(html, /YT\.PlayerState\.ENDED/, 'Playlist must advance on ENDED');
           assert.match(html, /onError/, 'YouTube errors must be handled');
           assert.match(html, /prefers-reduced-motion/, 'Reduced motion support missing');
           assert.match(html, /data-move=/, 'Touch D-pad missing');
-          assert.doesNotMatch(html, /<svg\\b|background-image:\\s*linear-gradient/i, 'Scene must not use vector SVG or CSS gradients');
-          const ids = [...html.matchAll(/\\bid="([^"]+)"/g)].map(m => m[1]);
+          assert.doesNotMatch(html, /<svg\b|background-image:\s*linear-gradient/i, 'Scene must not use vector SVG or CSS gradients');
+          const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map(m => m[1]);
           assert.equal(ids.length, new Set(ids).size, 'Duplicate HTML id');
-          const scripts = [...html.matchAll(/<script\\b([^>]*)>([\\s\\S]*?)<\\/script>/gi)].filter(m => !/\\bsrc\\s*=/.test(m[1]));
+          const scripts = [...html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)].filter(m => !/\bsrc\s*=/.test(m[1]));
           assert.equal(scripts.length, 1, 'Expected one application script');
           new vm.Script(scripts[0][2], {filename:'index.html:inline-script'});
           const poems = JSON.parse(fs.readFileSync('content/poems/poems.json','utf8'));
