@@ -18,3 +18,9 @@ Esses PNGs são arte original placeholder, não sprites profissionais ou assets 
 ## Licença
 
 A arte original gerada por este projeto pode ser reutilizada com atribuição ao repositório. Nenhum pacote externo CC0 foi incorporado; portanto, não há atribuições de terceiros a declarar.
+
+
+## Pacote externo incorporado
+
+- Kenney — **Roguelike Indoor pack**, spritesheet de móveis e interiores, obtido via OpenGameArt. Licença **CC0**. A atribuição não é obrigatória; crédito incluído por cortesia. Fonte: https://opengameart.org/content/roguelike-indoor-pack
+- O workflow de publicação baixa o ZIP original e extrai os arquivos em `assets/kenney-indoor/`. A cena continua tendo fallback raster próprio para não ficar preta se a origem externa estiver indisponível.
