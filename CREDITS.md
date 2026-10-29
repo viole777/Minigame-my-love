@@ -1,16 +1,15 @@
 # Créditos e licenças
 
-## Arte incluída nesta revisão
+## Arte original deste projeto
 
-- **Tilemap, quarto, móveis, efeitos de janela e personagem-placeholder:** formas de pixel desenhadas por código no `index.html`, criadas especificamente para este projeto. Não são sprites de jogos comerciais nem spritesheets de terceiros.
-- **Spritesheet de personagem de pacote livre:** não incorporado nesta revisão. A Mio usa um placeholder simples desenhado em pixels; substituir por um sprite de quatro direções licenciado é uma limitação conhecida.
-- **Pacote de tileset externo:** não incorporado nesta revisão. O piso e os móveis atuais são tiles desenhados por código, não arquivos de um pacote externo.
+- `assets/mio-sprites.svg`: spritesheet original de placeholder da Mio, criado para este projeto. Grade 3 colunas × 4 direções; cada frame mede 16×24 px. Não deriva de personagens ou sprites de jogos comerciais.
+- **Tilemap, quarto, móveis, janela e efeitos:** formas de pixel desenhadas por código no `index.html`, criadas especificamente para este projeto.
+- **Pacote de tileset externo:** ainda não incorporado. O tilemap atual usa tiles originais desenhados por código, não arquivos de um pacote externo com licença CC0.
 
-## Dependências externas
+## Dependência externa
 
-- **YouTube IFrame Player API** — carregada a partir de `https://www.youtube.com/iframe_api` para reproduzir as faixas após gesto do usuário. Consulte os termos e as políticas do YouTube: https://developers.google.com/youtube/iframe_api_reference
-- Não foram incluídos assets de Undertale, OMORI, Zelda, Harry Potter, Supernatural ou outras franquias.
+- **YouTube IFrame Player API** — carregada a partir de `https://www.youtube.com/iframe_api` para reproduzir as faixas após gesto do usuário. Consulte: https://developers.google.com/youtube/iframe_api_reference
 
-## Próximo passo de arte
+## Nota de licença
 
-Para cumprir integralmente o requisito de usar um pacote de sprites/tilesets livre, integrar um pacote específico após confirmar a licença do arquivo exato e incluir aqui o nome do autor, URL da fonte, licença e atribuição exigida. Não declarar CC0 ou outra licença sem conferir o asset que for efetivamente distribuído.
+Os assets visuais listados acima são originais deste projeto e não têm atribuição de terceiros. O requisito de incorporar um pacote externo de sprites/tileset com licença livre ainda está pendente; não vou declarar Kenney, OpenGameArt ou outro pacote como usado sem ter efetivamente incorporado e conferido os arquivos exatos.
