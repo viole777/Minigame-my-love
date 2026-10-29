@@ -22,12 +22,12 @@ button:focus-visible,a:focus-visible{outline:3px solid #fff0a6;outline-offset:2p
 </head>
 <body>
 <main class="app">
-<header class="top"><strong>✦ CANTINHO DA MIO</strong><span id="weatherIcon">☾</span></header>
+<header class="top"><strong>✦ CANTINHO DA MIO</strong><span id="weatherIcon" aria-hidden="true"></span></header>
 <section class="stage" aria-label="Quarto explorável">
 <div class="canvas-wrap"><canvas id="game" width="320" height="240" tabindex="0" aria-label="Quarto em pixel art. Toque em um objeto para caminhar até ele. Use setas ou WASD."></canvas></div>
 <nav class="inventory" aria-label="Inventário"><button id="invUp" aria-label="Itens anteriores">▲</button><button class="slot" data-slot="0" aria-label="Slot de inventário 1" aria-pressed="false"></button><button class="slot" data-slot="1" aria-label="Slot de inventário 2" aria-pressed="false"></button><button class="slot" data-slot="2" aria-label="Slot de inventário 3" aria-pressed="false"></button><button class="slot" data-slot="3" aria-label="Slot de inventário 4" aria-pressed="false"></button><button id="invDown" aria-label="Próximos itens">▼</button></nav>
 </section>
-<nav class="bottom" aria-label="Controles"><button id="home">⌂ Home</button><button id="hint">✦ Hint</button><button id="sound" aria-pressed="false">♫ Sound</button><button id="pause" aria-pressed="false">Ⅱ Pause</button></nav>
+<nav class="bottom" aria-label="Controles"><button id="home">Home</button><button id="hint">Hint</button><button id="sound" aria-pressed="false">Sound</button><button id="pause" aria-pressed="false">Pause</button></nav>
 <div class="dpad" aria-label="Movimento"><button class="up" data-move="up" aria-label="Cima">▲</button><button class="left" data-move="left" aria-label="Esquerda">◀</button><button class="down" data-move="down" aria-label="Baixo">▼</button><button class="right" data-move="right" aria-label="Direita">▶</button></div>
 </main>
 <div id="ytPlayer" aria-hidden="true" style="position:fixed;left:-1000px;top:0;width:1px;height:1px;overflow:hidden"></div>
@@ -51,7 +51,7 @@ const objectList=[
  {id:"desk",x:66,y:76,w:55,h:45,tx:126,ty:124},
  {id:"bed",x:208,y:76,w:101,h:76,tx:199,ty:158},
  {id:"radio",x:247,y:157,w:47,h:27,tx:239,ty:184},
- {id:"notebook",x:73,y:82,w:18,h:13,tx:93,ty:124},
+ {id:"notebook",x:73,y:82,w:18,h:13,tx:93,ty:130},
  {id:"floor",x:153,y:215,w:17,h:12,tx:150,ty:209}
 ];
 const itemData={key:{label:"✦",icon:0},thread:{label:"⌁",icon:1},moon:{label:"☾",icon:2},bookmark:{label:"▤",icon:3},pencil:{label:"╱",icon:4},button:{label:"●",icon:5},cassette:{label:"♫",icon:0}};
@@ -86,7 +86,7 @@ let pendingRadioStart=false;function startRadio(){if(radioStarted)return;if(!ytR
 function toggleSound(){if(!ytReady){pendingRadioStart=true;muted=!muted;playerState();return;}if(!radioStarted){startRadio();return;}muted=!muted;if(muted)yt.mute();else{yt.unMute();if(!paused)yt.playVideo();}playerState();}
 function renderTracks(){const list=$("#trackList");list.replaceChildren();tracks.forEach((t,i)=>{const b=document.createElement("button");b.type="button";b.textContent=t.title;b.setAttribute("aria-pressed",String(i===trackIndex));b.onclick=()=>{trackIndex=i;radioStarted=true;muted=false;paused=false;if(ytReady){yt.unMute();yt.setVolume(35);yt.loadVideoById(t.id);}playerState();renderTracks();};list.append(b);});}
 function addItem(id){if(found.has(id)||inventory.includes(id))return;found.add(id);inventory.push(id);renderInventory();}
-function renderInventory(){const slots=$$(".slot");slots.forEach((b,i)=>{b.replaceChildren();const id=inventory[invStart+i];b.setAttribute("aria-pressed",String(id===selected));if(id){const im=document.createElement("img");im.src="assets/inventory.png";im.alt="";im.style.objectPosition="0 0";im.style.objectFit="none";im.style.width="16px";im.style.height="16px";im.style.imageRendering="pixelated";const data=itemData[id];im.style.objectPosition=(-((data?.icon||0)%3)*16)+"px "+(-Math.floor((data?.icon||0)/3)*16)+"px";b.append(im);const label=document.createElement("span");label.textContent=data?.label||"✦";b.append(label);}});}
+function renderInventory(){const slots=$$(".slot");slots.forEach((b,i)=>{b.replaceChildren();const id=inventory[invStart+i];b.setAttribute("aria-pressed",String(id===selected));if(id){const im=document.createElement("img");im.src="assets/inventory.png";im.alt="";im.style.objectPosition="0 0";im.style.objectFit="none";im.style.width="16px";im.style.height="16px";im.style.imageRendering="pixelated";const data=itemData[id];im.style.objectPosition=(-((data?.icon||0)%3)*16)+"px "+(-Math.floor((data?.icon||0)/3)*16)+"px";b.append(im);const label=document.createElement("span");label.textContent=data?.label||"✦";/* item art comes only from the generated PNG sprite sheet */}});}
 function inventoryHas(id){return inventory.includes(id);}
 function consume(id){inventory=inventory.filter(x=>x!==id);if(selected===id)selected=null;renderInventory();}
 function openPanel(id){modal=id;target=null;$("#"+id).hidden=false;$("#game").blur();}
@@ -98,7 +98,7 @@ function unlock(i){if(unlocked.has(i))return;unlocked.add(i);renderPoems();if(mo
 function dist(a,b){return Math.hypot(a.x-b.x,a.y-b.y);}
 function collision(x,y){if(x<8||x>312||y<91||y>232)return true;const solids=[{x:7,y:75,w:46,h:42},{x:92,y:11,w:52,h:63},{x:66,y:76,w:55,h:45},{x:208,y:76,w:101,h:76},{x:247,y:157,w:47,h:27}];return solids.some(o=>x+3>o.x&&x-3<o.x+o.w&&y+7>o.y&&y-4<o.y+o.h);}
 function closestObject(x,y){return objectList.filter(o=>x>=o.x-3&&x<=o.x+o.w+3&&y>=o.y-3&&y<=o.y+o.h+3).sort((a,b)=>a.w*a.h-b.w*b.h)[0]||null;}
-function interact(id){if(id==="window"){weather=1-weather;$("#weatherIcon").textContent=weather?"✦":"☾";if(weather===1)addItem("moon");else openPanel("zoomPanel");return;}
+function interact(id){if(id==="window"){weather=1-weather;if(weather===1)addItem("moon");else openPanel("zoomPanel");return;}
  if(id==="shelf"){if(selected==="key"&&!used.has("shelfKey")){used.add("shelfKey");consume("key");addItem("bookmark");unlock(4);}else if(!found.has("key"))addItem("key");else if(!found.has("bookmark"))addItem("bookmark");else openZoom(id);return;}
  if(id==="wardrobe"){if(selected==="key"&&!used.has("wardrobeKey")){used.add("wardrobeKey");consume("key");unlock(1);addItem("thread");}else if(selected==="button"&&!used.has("wardrobeButton")){used.add("wardrobeButton");consume("button");unlock(6);}else openZoom(id);return;}
  if(id==="desk"){if(selected==="cassette"&&!used.has("deskCassette")){used.add("deskCassette");consume("cassette");unlock(7);}else if(!found.has("thread"))addItem("thread");else if(!found.has("pencil"))addItem("pencil");else openZoom(id);return;}
@@ -128,7 +128,7 @@ window.addEventListener("keyup",e=>{const map={ArrowLeft:"left",a:"left",ArrowRi
 $$(".slot").forEach(b=>b.onclick=()=>{const id=inventory[invStart+Number(b.dataset.slot)];selected=selected===id?null:id;renderInventory();});
 $("#invUp").onclick=()=>{invStart=Math.max(0,invStart-1);renderInventory();};$("#invDown").onclick=()=>{invStart=Math.min(Math.max(0,inventory.length-4),invStart+1);renderInventory();};
 $("#home").onclick=()=>closePanels();$("#hint").onclick=()=>{const i=[1,2,3,4,5,6,7].find(n=>!unlocked.has(n));const ids={1:"wardrobe",2:"bed",3:"radio",4:"shelf",5:"notebook",6:"wardrobe",7:"desk"};hintTarget=ids[i]||"notebook";setTimeout(()=>hintTarget=null,3000);};
-$("#sound").onclick=toggleSound;$("#pause").onclick=()=>{paused=!paused;$("#pause").setAttribute("aria-pressed",String(paused));$("#pause").textContent=paused?"▶ Play":"Ⅱ Pause";if(ytReady&&radioStarted){if(paused)yt.pauseVideo();else if(!muted)yt.playVideo();}};
+$("#sound").onclick=toggleSound;$("#pause").onclick=()=>{paused=!paused;$("#pause").setAttribute("aria-pressed",String(paused));$("#pause").textContent=paused?"Play":"Pause";if(ytReady&&radioStarted){if(paused)yt.pauseVideo();else if(!muted)yt.playVideo();}};
 $("#prevTrack").onclick=()=>loadTrack(trackIndex-1,radioStarted&&!muted);$("#nextTrack").onclick=nextTrack;$("#playPause").onclick=()=>{if(!radioStarted)startRadio();else if(playing)yt.pauseVideo();else{muted=false;yt.unMute();yt.playVideo();}};renderTracks();
 $$("[data-close]").forEach(b=>b.onclick=closePanels);document.querySelectorAll(".panel").forEach(p=>p.addEventListener("click",e=>{if(e.target===p)closePanels();}));
 renderInventory();requestAnimationFrame(loop);
