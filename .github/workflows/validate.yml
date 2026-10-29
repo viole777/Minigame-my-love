@@ -32,6 +32,9 @@ jobs:
           assert.match(html, /<main\b/i, 'Missing main landmark');
           assert.match(html, /prefers-reduced-motion/i, 'Reduced-motion support is expected');
           assert.doesNotMatch(html, /<iframe\b[^>]*\bautoplay\b/i, 'Embedded media must not autoplay');
+          assert.match(html, /<svg\b[^>]*class="scene-svg"/i, 'Missing pixel-art room scene');
+          assert.match(html, /aria-modal="true"/i, 'Interactive panels should behave as dialogs');
+          assert.match(html, /data-sticker=/i, 'Missing scrapbook touch controls');
 
           const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map(match => match[1]);
           assert.equal(ids.length, new Set(ids).size, 'Duplicate HTML id found');
@@ -40,7 +43,7 @@ jobs:
           assert.equal(scripts.length, 1, 'Expected one inline application script');
           new vm.Script(scripts[0][1], { filename: 'index.html:inline-script' });
 
-          for (const id of ['scene', 'trackSelect', 'player', 'poemsPanel', 'huntersPanel', 'scrapPanel', 'secretsPanel']) {
+          for (const id of ['game', 'radioPanel', 'player', 'poemsPanel', 'huntersPanel', 'scrapPanel', 'booksPanel']) {
             assert.ok(ids.includes(id), 'Missing required element id: ' + id);
           }
 
