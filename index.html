@@ -107,7 +107,7 @@ function interact(id){if(id==="window"){weather=1-weather;if(weather===1)addItem
  if(id==="notebook"){if(selected==="pencil"&&!used.has("notebookPencil")){used.add("notebookPencil");consume("pencil");unlock(5);}openPoems();return;}
  if(id==="floor"){if(!found.has("pencil"))addItem("pencil");else openZoom(id);}
 }
-function openZoom(id){openPanel("zoomPanel");const z=$("#zoomCanvas").getContext("2d");z.imageSmoothingEnabled=false;const o=objectList.find(x=>x.id===id)||objectList[0];z.fillStyle="#080d1a";z.fillRect(0,0,256,160);if(bg.complete)z.drawImage(bg,o.x,o.y,o.w,o.h,0,0,256,160);$("#zoomAction").onclick=()=>{closePanels();interact(id);};}
+function openZoom(id){openPanel("zoomPanel");const z=$("#zoomCanvas").getContext("2d");z.imageSmoothingEnabled=false;const o=objectList.find(x=>x.id===id)||objectList[0];z.fillStyle="#080d1a";z.fillRect(0,0,256,160);if(bg.complete)z.drawImage(bg,o.x,o.y,o.w,o.h,0,0,256,160);$("#zoomAction").onclick=()=>{if(id==="shelf"&&!found.has("bookmark"))addItem("bookmark");else if(id==="desk"&&!found.has("pencil"))addItem("pencil");else if(id==="floor"&&!found.has("pencil"))addItem("pencil");closePanels();};}
 function triggerObject(id){if(id==="radio"&&!radioStarted)startRadio();interact(id);}
 function moveToObject(o){if(!o)return;target={x:o.tx,y:o.ty,id:o.id};}
 function draw(){ctx.imageSmoothingEnabled=false;ctx.fillStyle="#070a14";ctx.fillRect(0,0,W,H);if(bg.complete)ctx.drawImage(bg,0,0);if(weather===0&&rain.complete&&!reduced)ctx.drawImage(rain,weatherFrame*W,0,W,H,0,0,W,H);else if(weather===1){for(let i=0;i<20;i++){const x=(i*37+clock*0.08)%W,y=(i*29)%75;ctx.fillStyle=i%3?"#b9d5f6":"#d6c7ff";ctx.fillRect(x,y,1,1);}}
