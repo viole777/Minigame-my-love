@@ -75,7 +75,7 @@ const tracks=[
  {title:"Cotidiano — Chico Buarque",id:"dHYOVuq_Fco"},
  {title:"Heart to Heart — Mac DeMarco",id:"qBoQzo98EpQ"}
 ];
-let trackIndex=0,yt=null,ytReady=false,radioStarted=false,playing=false,muted=true,skipAfterError=false;
+let lastTime=0;let trackIndex=0,yt=null,ytReady=false,radioStarted=false,playing=false,muted=true,skipAfterError=false;
 function playerState(){const track=tracks[trackIndex];$("#radioTitle").textContent=track.title;$("#youtubeLink").href="https://www.youtube.com/watch?v="+track.id;$("#radioLed").classList.toggle("playing",playing);$("#sound").setAttribute("aria-pressed",String(!muted&&playing));}
 function loadTrack(i,autoplay=false){trackIndex=(i+tracks.length)%tracks.length;playerState();renderTracks();if(ytReady){if(autoplay)yt.loadVideoById(tracks[trackIndex].id);else yt.cueVideoById(tracks[trackIndex].id);}}
 function nextTrack(){loadTrack(trackIndex+1,radioStarted&&!muted&&!paused);}
