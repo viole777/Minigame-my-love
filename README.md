@@ -1,31 +1,30 @@
-# Cantinho do meu amor
+# Cantinho da Mio
 
-Quarto interativo em pixel art, pensado primeiro para celular, com atmosfera noturna azulada, janela alternável entre chuva e céu estrelado, rádio manual, caderno de poemas, estante com bilhetes e dois minijogos.
+Jogo de exploração em pixel art, mobile-first, num quarto noturno. A cena é um canvas de baixa resolução (320×180) escalado com pixelização; o jogador pode andar com setas/WASD ou D-pad e interagir com janela, estante, rádio, caderno, mesa e segredos.
 
-## Como abrir
+## Abrir e publicar
 
-- Abra `index.html` em um navegador moderno.
-- Para publicar como site estático, habilite GitHub Pages nas configurações do repositório e selecione a branch `main` e a pasta raiz.
-- Não há etapa de build nem dependências de pacote.
+Abra `index.html` num navegador moderno. GitHub Pages publica o projeto como site estático, sem etapa de build ou dependências de pacote.
 
-## O que está implementado
+## Recursos
 
-- Cena principal com layout responsivo e preferência por movimento reduzido.
-- Janela com alternância entre chuva e céu estrelado.
-- Rádio com seis faixas, seleção e botões anterior/próxima; nunca inicia áudio automaticamente. Os IDs de vídeo são candidatos e ainda precisam ser verificados manualmente; o player pode ser bloqueado pelo YouTube, e há link alternativo para abrir a faixa.
-- Caderno com os quatro poemas completos disponíveis no documento de referência, sem acrescentar os três poemas antigos cujo conteúdo integral não estava disponível.
-- Estante com mensagens opcionais.
-- Arquivo dos Caçadores, com pistas interativas e conclusão narrativa sem cronômetro.
-- Scrapbook com adesivos que podem ser arrastados e removidos.
-- Segredo opcional, painéis fecháveis, foco visível e textos em português.
+- Exploração do quarto em canvas, movimento em quatro direções e colisão com paredes/móveis.
+- Janela com chuva/estrelas e luz pulsante; animação reduzida quando `prefers-reduced-motion` está ativo.
+- Diálogo de RPG com efeito de escrita, botão para revelar o texto completo e escolhas simples.
+- Controles por teclado e D-pad de toque, interação por proximidade, painel que fecha com Esc/B/X e retorno à posição anterior.
+- Rádio usando a YouTube IFrame Player API: começa após o primeiro gesto do jogador, avança ao terminar, tenta pular erros, oferece play/pause e links de pesquisa no YouTube.
+- Caderno com os quatro poemas completos do documento mestre. Os três antigos permanecem reservados.
+- Estante, Arquivo dos Caçadores e scrapbook com adesivos móveis.
+- Sem analytics, sem coleta de dados, sem pontuação ou game over.
 
-## Limitações conhecidas
+## Limitações honestas
 
-- Os três poemas antigos reservados no documento de referência precisam ser fornecidos pelo autor antes de serem incluídos; o conteúdo não foi inventado.
-- O funcionamento e a disponibilidade dos vídeos incorporados não foram verificados automaticamente.
-- O scrapbook existe apenas durante a sessão do navegador: não envia dados nem persiste conteúdo.
-- A arte do quarto é construída com CSS e formas originais, não é uma ilustração pixel art detalhada desenhada à mão.
+- A personagem é um sprite placeholder original feito de pixels desenhados no canvas, não um spritesheet de personagem licenciado. O cenário e o tilemap também são desenhados por código; nenhum pacote externo de sprites foi incorporado nesta revisão.
+- Os IDs do YouTube não foram verificados individualmente em reprodução real. A API lida com eventos de erro quando são reportados, mas algumas restrições de vídeo podem variar por região/conta.
+- Não foi possível testar o jogo num celular físico nesta sessão. A validação automática confere estrutura, IDs, integração declarada e sintaxe JS, não substitui teste visual/manual.
+- Os três poemas antigos precisam dos textos originais antes de serem adicionados.
+- O scrapbook não salva conteúdo depois que a página é fechada.
 
 ## Privacidade e acessibilidade
 
-Não há analytics nem coleta de dados pessoais. O áudio não toca automaticamente. A interface inclui foco de teclado visível, rótulos acessíveis, áreas de toque e respeito a `prefers-reduced-motion`.
+Não há analytics nem armazenamento remoto. A interface inclui foco visível, rótulos, controles de toque e teclado, áreas de toque grandes e suporte a movimento reduzido.
