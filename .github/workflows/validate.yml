@@ -1,0 +1,48 @@
+name: Validate site
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Validate page structure and inline JavaScript syntax
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+          const vm = require('node:vm');
+          const assert = require('node:assert/strict');
+          const html = fs.readFileSync('index.html', 'utf8');
+
+          assert.match(html, /<!doctype html>/i, 'Missing HTML doctype');
+          assert.match(html, /<html[^>]+lang="pt-BR"/i, 'Document language should be pt-BR');
+          assert.match(html, /<main\b/i, 'Missing main landmark');
+          assert.match(html, /prefers-reduced-motion/i, 'Reduced-motion support is expected');
+          assert.doesNotMatch(html, /<iframe\b[^>]*\bautoplay\b/i, 'Embedded media must not autoplay');
+
+          const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map(match => match[1]);
+          assert.equal(ids.length, new Set(ids).size, 'Duplicate HTML id found');
+
+          const scripts = [...html.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/gi)];
+          assert.equal(scripts.length, 1, 'Expected one inline application script');
+          new vm.Script(scripts[0][1], { filename: 'index.html:inline-script' });
+
+          for (const id of ['scene', 'trackSelect', 'player', 'poemsPanel', 'huntersPanel', 'scrapPanel', 'secretsPanel']) {
+            assert.ok(ids.includes(id), 'Missing required element id: ' + id);
+          }
+
+          console.log('Validation passed: document structure, unique IDs, key sections, media behavior, reduced motion, and JavaScript syntax.');
+          NODE
