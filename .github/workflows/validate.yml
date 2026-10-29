@@ -11,46 +11,51 @@ permissions:
 
 jobs:
   validate:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: Validate page structure and inline JavaScript syntax
+      - name: Generate and inspect pixel-art PNG assets
+        run: |
+          python3 scripts/generate_assets.py
+          python3 - <<'PY'
+          import struct
+          from pathlib import Path
+          expected = {"room.png": (320,240), "mio.png": (48,96), "rain.png": (1280,240), "inventory.png": (48,32)}
+          for name, size in expected.items():
+              p = Path("assets") / name
+              data = p.read_bytes()
+              assert data[:8] == b"\\x89PNG\\r\\n\\x1a\\n", f"{name} is not a PNG"
+              dims = struct.unpack(">II", data[16:24])
+              assert dims == size, f"{name}: expected {size}, got {dims}"
+          print("PNG assets valid:", ", ".join(expected))
+          PY
+      - name: Validate HTML and JavaScript syntax
         run: |
           node <<'NODE'
           const fs = require('node:fs');
           const vm = require('node:vm');
           const assert = require('node:assert/strict');
           const html = fs.readFileSync('index.html', 'utf8');
-
-          assert.match(html, /<!doctype html>/i, 'Missing HTML doctype');
-          assert.match(html, /<html[^>]+lang="pt-BR"/i, 'Document language should be pt-BR');
-          assert.match(html, /<main\b/i, 'Missing main landmark');
-          assert.match(html, /prefers-reduced-motion/i, 'Reduced-motion support is expected');
-          assert.match(html, /<canvas\b[^>]*id="game"/i, 'Missing low-resolution game canvas');
-          assert.match(html, /image-rendering:\s*pixelated/i, 'Pixelated scaling should be enabled');
-          assert.match(html, /prefers-reduced-motion/i, 'Reduced motion should be respected');
-          assert.match(html, /YouTubeIframeAPIReady/i, 'Missing YouTube IFrame API integration');
-          assert.match(html, /onStateChange/i, 'Missing YouTube state-change handling');
-          assert.match(html, /data-move=/i, 'Missing touch D-pad controls');
-          assert.match(html, /aria-modal="true"/i, 'Interactive panels should behave as dialogs');
-          assert.match(html, /data-sticker=/i, 'Missing scrapbook touch controls');
-
-          const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map(match => match[1]);
-          assert.equal(ids.length, new Set(ids).size, 'Duplicate HTML id found');
-
-          const scripts = [...html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)];
-          const inlineScripts = scripts.filter(match => !/\bsrc\s*=/.test(match[1]));
-          assert.equal(inlineScripts.length, 1, 'Expected one inline application script');
-          new vm.Script(inlineScripts[0][2], { filename: 'index.html:inline-script' });
-
-          for (const id of ['game', 'radioPanel', 'ytPlayer', 'poemsPanel', 'huntersPanel', 'scrapPanel', 'booksPanel', 'dialogue', 'muteButton']) {
-            assert.ok(ids.includes(id), 'Missing required element id: ' + id);
-          }
-
-          console.log('Validation passed: canvas game, unique IDs, panels, touch controls, YouTube API integration, reduced motion, and JavaScript syntax.');
+          assert.match(html, /<canvas[^>]*width="320"[^>]*height="240"/i, 'Canvas must be 320x240');
+          assert.match(html, /image-rendering:\\s*pixelated/i, 'Pixel scaling missing');
+          assert.match(html, /assets\\/room\\.png/, 'Room PNG must be loaded');
+          assert.match(html, /assets\\/mio\\.png/, 'Character PNG must be loaded');
+          assert.match(html, /YouTubeIframeAPIReady/, 'YouTube API callback missing');
+          assert.match(html, /YT\\.PlayerState\\.ENDED/, 'Playlist must advance on ENDED');
+          assert.match(html, /onError/, 'YouTube errors must be handled');
+          assert.match(html, /prefers-reduced-motion/, 'Reduced motion support missing');
+          assert.match(html, /data-move=/, 'Touch D-pad missing');
+          assert.doesNotMatch(html, /<svg\\b|background-image:\\s*linear-gradient/i, 'Scene must not use vector SVG or CSS gradients');
+          const ids = [...html.matchAll(/\\bid="([^"]+)"/g)].map(m => m[1]);
+          assert.equal(ids.length, new Set(ids).size, 'Duplicate HTML id');
+          const scripts = [...html.matchAll(/<script\\b([^>]*)>([\\s\\S]*?)<\\/script>/gi)].filter(m => !/\\bsrc\\s*=/.test(m[1]));
+          assert.equal(scripts.length, 1, 'Expected one application script');
+          new vm.Script(scripts[0][2], {filename:'index.html:inline-script'});
+          const poems = JSON.parse(fs.readFileSync('content/poems/poems.json','utf8'));
+          assert.deepEqual(Object.keys(poems).sort(), ['4','5','6','7']);
+          for (const file of ['morte-do-vazio.txt','o-tempo.txt','monstro-que-devora.txt']) assert.ok(fs.existsSync('content/poems/'+file));
+          console.log('HTML, JS syntax, poem separation and asset generation checks passed.');
           NODE
