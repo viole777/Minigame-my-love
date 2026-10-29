@@ -19,7 +19,7 @@ PAL = {
 }
 class Img:
  def __init__(self,w,h,fill="ink"):
-  self.w,self.h=w,h; self.p=bytearray(PAL[fill]*(w*h))
+  self.w,self.h=w,h; self.p=bytearray((PAL[fill] if isinstance(fill,str) else fill)*(w*h))
  def px(self,x,y,c):
   if 0<=x<self.w and 0<=y<self.h:
    i=(y*self.w+x)*4; self.p[i:i+4]=bytes(PAL[c] if isinstance(c,str) else c)
