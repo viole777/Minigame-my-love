@@ -18,7 +18,7 @@ button:focus-visible,a:focus-visible{outline:3px solid #fff0a6;outline-offset:2p
 @media(orientation:portrait){.stage{grid-template-columns:1fr;grid-template-rows:auto auto}.inventory{grid-template-columns:32px repeat(4,minmax(0,1fr)) 32px;grid-template-rows:54px;gap:5px}.inventory button{min-height:44px}.slot img{width:28px;height:28px}#game{max-height:56svh}.dpad{margin-top:7px}.bottom{position:sticky;bottom:0;background:var(--ink);padding-bottom:env(safe-area-inset-bottom)}}
 @media(orientation:landscape) and (max-height:520px){.app{width:min(100%,850px)}.stage{grid-template-columns:minmax(0,1fr) 60px}#game{max-height:calc(100svh - 95px)}.bottom{margin-top:4px}.dpad{position:fixed;right:82px;bottom:55px;background:#070a14aa;padding:3px;margin:0}}
 @media(prefers-reduced-motion:reduce){.hint-flash{animation:none!important}}
-</style>
+@media(min-width:601px){.joystick{display:none}}@media(max-width:600px){.stage{display:flex;flex-direction:column}.inventory{grid-template-columns:28px repeat(4,minmax(0,1fr)) 28px;grid-template-rows:54px}.inventory button{min-height:48px}.bottom button{min-height:48px}.canvas-wrap{width:100%}#game{width:100%;max-height:56svh}.joystick{margin:10px 0 8px 10px}}\n</style>
 </head>
 <body>
 <main class="app">
