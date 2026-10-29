@@ -5,49 +5,100 @@
 <meta name="theme-color" content="#17131d"><meta name="description" content="Um quarto ilustrado com poemas, música e pequenos jogos de observação.">
 <title>Cantinho da Mio</title>
 <style>
-:root{color-scheme:dark;--bg:#17151d;--panel:#29232e;--paper:#e9d9c8;--muted:#bcaeaa;--rose:#c99b9a;--gold:#e5c99d;--line:#79636b}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 50% 0,#343044,#17151d 65%);color:var(--paper);font:16px/1.55 Georgia,serif;min-height:100vh}
-button{font:inherit;color:inherit;background:#3b303d;border:1px solid #92747b;border-radius:10px;padding:10px 14px;min-height:44px;cursor:pointer;touch-action:manipulation}
-button:hover{background:#51404b}button:focus-visible,a:focus-visible{outline:3px solid var(--gold);outline-offset:3px}button:disabled{opacity:.45;cursor:not-allowed}
-.app{width:min(1160px,100%);margin:auto;padding:16px 14px 28px}.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 12px}.brand{font:600 13px/1.3 system-ui;letter-spacing:.22em;color:#e9c6b7}.hintline{font:12px system-ui;color:var(--muted)}
-.layout{display:grid;grid-template-columns:minmax(0,1fr) 250px;gap:14px;align-items:start}.frame{padding:8px;background:linear-gradient(145deg,#67505b,#292331);border:1px solid #987d7d;border-radius:16px;box-shadow:0 22px 65px #09070aaa}
-.scene{position:relative;overflow:hidden;border-radius:9px;background:#343044;aspect-ratio:4/3}.scene>img{display:block;width:100%;height:100%;object-fit:cover}
-.hotspot{position:absolute;display:grid;place-items:center;min-width:44px;min-height:44px;padding:5px 9px;background:#211b28b8;border:1px solid #f1d8c0;color:#fff2df;border-radius:9px;font:12px system-ui;backdrop-filter:blur(4px);box-shadow:0 3px 12px #16101b77}
-.hotspot:after{content:"";width:6px;height:6px;border-radius:50%;background:var(--gold);box-shadow:0 0 12px var(--gold);margin-top:3px}
-.hotspot[data-id=window]{left:9%;top:22%}.hotspot[data-id=shelf]{left:9%;top:69%}.hotspot[data-id=desk]{left:39%;top:57%}.hotspot[data-id=bed]{right:18%;bottom:12%}.hotspot[data-id=dresser]{right:8%;top:36%}.hotspot[data-id=radio]{left:48%;top:51%}.hotspot[data-id=notebook]{left:39%;top:51%}
-.side{display:grid;gap:12px}.card{padding:14px;border:1px solid var(--line);border-radius:13px;background:linear-gradient(145deg,#302936,#211d27)}h2{font:600 12px system-ui;letter-spacing:.16em;color:#e8c4b2;margin:0 0 10px}.inventory{display:grid;grid-template-columns:repeat(2,1fr);gap:7px}.item{display:grid;gap:2px;place-items:center;font:12px system-ui;min-height:62px;background:#211c26}.item .ico{font-size:22px}.item[aria-pressed=true]{border:2px solid var(--gold);background:#4c3a46}.muted{font:12px system-ui;color:var(--muted)}.actions{display:grid;grid-template-columns:1fr 1fr;gap:7px}.actions button{font:12px system-ui}.progress{height:5px;border-radius:8px;background:#15121b;overflow:hidden;margin-top:10px}.progress span{display:block;width:0;height:100%;background:linear-gradient(90deg,#b77e89,#e6c99d);transition:width .25s}
-.overlay{position:fixed;z-index:10;inset:0;background:#100d15eF;display:grid;place-items:center;padding:14px}.overlay[hidden]{display:none}.dialog{width:min(680px,100%);max-height:min(90svh,900px);overflow:auto;padding:17px;background:linear-gradient(145deg,#332a37,#211d27);border:1px solid #a88a85;border-radius:16px;box-shadow:0 24px 80px #000b}.dialoghead{display:flex;align-items:center;gap:10px;margin-bottom:14px}.dialoghead h2{margin:0 auto 0 0}.close{font-size:20px;min-width:44px;padding:5px}
-.poem-tabs,.track-list,.clues,.scrap-items{display:flex;gap:7px;flex-wrap:wrap;margin:12px 0}.poem-tabs button,.track-list button,.clues button,.scrap-items button{font:12px system-ui}.poem{white-space:pre-wrap;line-height:1.9;padding:18px;background:#211c27;border:1px solid #5d4c56;border-radius:10px;max-height:55svh;overflow:auto}.poem h3{font:600 15px system-ui;color:#edc9b4;margin:0 0 12px}.track-list{display:grid}.track-list button{text-align:left}.track-list button[aria-pressed=true]{border-color:var(--gold);background:#58424d}.external{color:#f0d1ae}.case-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}.clue{min-height:74px;text-align:left}.clue[aria-pressed=true]{border-color:var(--gold);background:#58424d}.result{padding:12px;background:#211c27;border-radius:10px;margin-top:12px}.scrap{min-height:230px;border:1px dashed #b99991;border-radius:12px;padding:14px;background:repeating-linear-gradient(0deg,#d9c5ad,#d9c5ad 30px,#d1bca7 31px,#d1bca7 32px);color:#463744;position:relative}.scrap-piece{display:inline-grid;place-items:center;margin:7px;padding:9px 12px;border:1px solid #947c78;background:#f1e5d6;color:#493b48;border-radius:4px;box-shadow:2px 3px 0 #745c5b;font:15px Georgia}.scrap-piece button{color:#493b48;background:transparent;border:0;padding:0;min-height:24px}.scrap-tools{display:flex;gap:7px;flex-wrap:wrap;margin:10px 0}
-@media(max-width:760px){.layout{grid-template-columns:1fr}.side{grid-template-columns:1fr 1fr}.wide{grid-column:1/-1}.app{padding:10px 9px 22px}.frame{padding:5px}.hintline{max-width:48%;text-align:right}}@media(max-width:450px){.side{grid-template-columns:1fr}.wide{grid-column:auto}.top{align-items:flex-start}.hotspot{font-size:10px;min-width:40px;min-height:40px;padding:3px 6px}.case-grid{grid-template-columns:1fr}}
+:root{color-scheme:dark;--ink:#eee4d8;--muted:#b7a9a2;--night:#17151b;--plum:#29232d;--plum2:#352a35;--rose:#c79a9b;--brass:#d7bd91;--edge:#66515a;--serif:Georgia,"Times New Roman",serif;--sans:system-ui,-apple-system,"Segoe UI",sans-serif}
+*{box-sizing:border-box}html{background:var(--night);scroll-behavior:smooth}body{margin:0;min-height:100vh;color:var(--ink);font:15px/1.55 var(--serif);background:radial-gradient(ellipse at 48% -20%,#51404a 0,#28232d 38%,#17151b 78%);background-attachment:fixed}
+button{font:inherit;color:inherit;cursor:pointer;touch-action:manipulation}button:focus-visible,a:focus-visible{outline:2px solid var(--brass);outline-offset:4px}
+.app{width:min(1320px,100%);margin:auto;padding:26px clamp(14px,3vw,38px) 38px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:0 3px 18px;margin-bottom:18px;border-bottom:1px solid #8c74734d}
+.brand{display:flex;align-items:center;gap:13px;color:#f0d7c3;font:600 11px/1.3 var(--sans);letter-spacing:.28em;text-transform:uppercase}
+.brand:before{content:"";width:30px;height:1px;background:var(--brass)}
+.hintline{font:11px var(--sans);letter-spacing:.12em;text-transform:uppercase;color:#c6b5ad}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 286px;gap:22px;align-items:start}
+.frame{position:relative;padding:9px;background:linear-gradient(135deg,#a8897b,#4d3b48 35%,#2b2631 75%);border:1px solid #c3a48c55;box-shadow:0 25px 70px #09070bb8,0 2px 0 #f1d7b133 inset}
+.scene{position:relative;overflow:hidden;aspect-ratio:4/3;background:#333044}
+.scene>img{display:block;width:100%;height:100%;object-fit:cover;filter:saturate(.88) contrast(1.03)}
+.scene:after{content:"";position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 0 90px #15111a70,inset 0 0 0 1px #f2d6b31f}
+.hotspot{position:absolute;z-index:1;display:grid;place-items:center;width:25px;height:25px;padding:0;border:1px solid #f3ddc4b8;border-radius:50%;background:#2a2330b8;color:#f7e5cf;font:0 var(--sans);box-shadow:0 0 0 5px #241d2b30,0 0 18px #f1d1a666;backdrop-filter:blur(3px);transition:transform .2s,background .2s}
+.hotspot:before{content:"";width:5px;height:5px;border-radius:50%;background:var(--brass)}
+.hotspot:after{content:attr(data-label);position:absolute;left:31px;top:50%;transform:translateY(-50%);white-space:nowrap;padding:5px 9px;background:#211b25e8;border:1px solid #b99b8870;color:#f3e5d8;font:10px var(--sans);letter-spacing:.09em;text-transform:uppercase;opacity:0;pointer-events:none;transition:opacity .2s}
+.hotspot:hover,.hotspot:focus-visible{transform:scale(1.16);background:#7c5966}
+.hotspot:hover:after,.hotspot:focus-visible:after{opacity:1}
+.hotspot[data-id=window]{left:23%;top:32%}.hotspot[data-id=shelf]{left:19%;top:72%}.hotspot[data-id=desk]{left:45%;top:59%}.hotspot[data-id=bed]{right:28%;bottom:20%}.hotspot[data-id=dresser]{right:18%;top:43%}.hotspot[data-id=radio]{left:53%;top:54%}.hotspot[data-id=notebook]{left:45%;top:52%}
+.scene-caption{display:flex;justify-content:space-between;gap:12px;padding:11px 4px 1px;color:#c9b7ad;font:10px var(--sans);letter-spacing:.12em;text-transform:uppercase}
+.side{display:grid;gap:13px}
+.card{padding:17px 17px 16px;background:linear-gradient(145deg,#342b36eF,#211e27f2);border:1px solid #a9898450;box-shadow:0 12px 35px #0c091044,inset 0 1px #f5d8c91a}
+h2{margin:0 0 13px;color:#e5c8b4;font:600 10px var(--sans);letter-spacing:.22em;text-transform:uppercase}
+.inventory{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+.item{display:flex;align-items:center;gap:8px;min-height:43px;padding:7px 9px;border:1px solid #735d655e;background:#211c25;font:11px var(--sans);text-align:left;transition:border-color .2s,background .2s}
+.item .ico{font-size:17px;color:var(--brass)}.item[aria-pressed=true]{border-color:var(--brass);background:#59414b}
+.muted{font:11px/1.5 var(--sans);color:var(--muted)}#selection{margin:11px 0 0}
+#status{min-height:34px}
+.progress{height:2px;background:#17141b;margin-top:14px;overflow:hidden}.progress span{display:block;width:0;height:100%;background:var(--brass);transition:width .3s}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.actions button{min-height:39px;padding:8px;border:1px solid #82666b66;background:#251f29;color:#e7d6ca;text-align:left;font:10px var(--sans);letter-spacing:.02em;transition:background .2s,border-color .2s}
+.actions button:hover{background:#4b3944;border-color:#b18d83}
+.actions button:last-child{grid-column:1/-1;text-align:center;color:#c6b5ad}
+.overlay{position:fixed;z-index:10;inset:0;display:grid;place-items:center;padding:18px;background:#0d0b10eF;backdrop-filter:blur(9px)}
+.overlay[hidden]{display:none}
+.dialog{width:min(720px,100%);max-height:min(91svh,920px);overflow:auto;padding:clamp(18px,3vw,30px);background:linear-gradient(145deg,#382e39,#211d27);border:1px solid #b18c866e;box-shadow:0 30px 100px #000b,0 1px #f7ddc51c inset}
+.dialoghead{display:flex;align-items:center;gap:12px;padding-bottom:15px;margin-bottom:16px;border-bottom:1px solid #98777a4d}
+.dialoghead h2{margin:0 auto 0 0;font-size:11px;letter-spacing:.24em}
+.close{width:38px;height:38px;padding:0;border:1px solid #84676c;background:transparent;color:#e6d2c4;font:23px var(--sans)}
+.poem-tabs,.track-list,.clues,.scrap-items{display:flex;gap:7px;flex-wrap:wrap;margin:13px 0}
+.poem-tabs button,.track-list button,.clues button,.scrap-items button{padding:9px 11px;border:1px solid #80666b;background:#28222c;font:10px var(--sans);letter-spacing:.03em}
+.poem-tabs button:hover,.track-list button:hover,.clues button:hover{border-color:var(--brass)}
+.poem{white-space:pre-wrap;line-height:1.95;padding:clamp(16px,3vw,28px);background:#211c26;border:1px solid #6e59614d;max-height:57svh;overflow:auto;font-size:15px}
+.poem h3{font:italic 20px var(--serif);color:#e8c7b5;margin:0 0 18px}
+.track-list{display:grid;grid-template-columns:1fr 1fr}
+.track-list button{display:flex;align-items:center;gap:10px;min-height:49px;text-align:left;color:#e9ddd2}
+.track-list button:before{content:"";width:7px;height:7px;flex:0 0 7px;border-radius:50%;background:#92747d}
+.track-list button[aria-pressed=true]{border-color:var(--brass);background:#4b3944}
+.track-list button[aria-pressed=true]:before{background:var(--brass);box-shadow:0 0 10px var(--brass)}
+.player-shell{margin:14px 0 8px;padding:13px;background:#17141c;border:1px solid #7a626b}
+.player-meta{display:flex;justify-content:space-between;gap:10px;margin-bottom:10px;color:#d7c4b8;font:10px var(--sans);letter-spacing:.1em;text-transform:uppercase}
+.player-frame{position:relative;aspect-ratio:16/9;background:#09080c;overflow:hidden}
+.player-frame iframe{display:block;width:100%;height:100%;border:0}
+.player-note{margin:9px 0 0;color:#a99b9a;font:10px var(--sans)}
+.case-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.clue{min-height:74px;text-align:left;line-height:1.45}
+.clue[aria-pressed=true]{border-color:var(--brass);background:#58424d}
+.result{padding:14px;background:#211c27;border:1px solid #6e59614d;margin-top:14px}
+.scrap{min-height:230px;border:1px dashed #b99991;padding:14px;background:repeating-linear-gradient(0deg,#d9c5ad,#d9c5ad 30px,#d1bca7 31px,#d1bca7 32px);color:#463744}
+.scrap-piece{display:inline-grid;place-items:center;margin:7px;padding:9px 12px;border:1px solid #947c78;background:#f1e5d6;color:#493b48;box-shadow:2px 3px 0 #745c5b;font:15px var(--serif)}
+.scrap-piece button{color:#493b48;background:transparent;border:0;padding:0;min-height:24px}
+.scrap-tools{display:flex;gap:7px;flex-wrap:wrap;margin:10px 0}
+.scrap-tools button{font:10px var(--sans)}
+@media(max-width:850px){.layout{grid-template-columns:1fr}.side{grid-template-columns:1fr 1fr}.wide{grid-column:1/-1}.app{padding-top:15px}}
+@media(max-width:520px){.app{padding:10px 9px 22px}.top{padding-bottom:12px;margin-bottom:12px}.hintline{font-size:9px}.side{grid-template-columns:1fr}.wide{grid-column:auto}.hotspot{width:23px;height:23px}.hotspot:after{display:none}.scene-caption{font-size:8px}.track-list{grid-template-columns:1fr}.case-grid{grid-template-columns:1fr}.dialog{padding:16px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
 </style>
 </head>
 <body><main class="app">
-<header class="top"><div class="brand">✦ CANTINHO DA MIO</div><div class="hintline">Quarto · Caderno · Rádio</div></header>
+<header class="top"><div class="brand">Cantinho da Mio</div><div class="hintline">Quarto · Caderno · Rádio</div></header>
 <div class="layout">
-<section class="frame"><div class="scene" aria-label="Quarto ilustrado interativo">
+<section><div class="frame"><div class="scene" aria-label="Quarto ilustrado interativo">
 <img src="assets/quarto-ilustrado.svg" alt="Quarto aconchegante à noite, com janela, estante, escrivaninha, cama e cômoda">
-<button class="hotspot" data-id="window" aria-label="Investigar janela">Janela</button>
-<button class="hotspot" data-id="shelf" aria-label="Investigar estante">Estante</button>
-<button class="hotspot" data-id="desk" aria-label="Abrir escrivaninha">Mesa</button>
-<button class="hotspot" data-id="bed" aria-label="Investigar cama">Cama</button>
-<button class="hotspot" data-id="dresser" aria-label="Investigar cômoda">Cômoda</button>
-<button class="hotspot" data-id="notebook" aria-label="Abrir caderno">Caderno</button>
-<button class="hotspot" data-id="radio" aria-label="Abrir rádio">Rádio</button>
-</div></section>
+<button class="hotspot" data-id="window" data-label="Janela" aria-label="Investigar janela"></button>
+<button class="hotspot" data-id="shelf" data-label="Estante" aria-label="Investigar estante"></button>
+<button class="hotspot" data-id="desk" data-label="Mesa" aria-label="Abrir escrivaninha"></button>
+<button class="hotspot" data-id="bed" data-label="Cama" aria-label="Investigar cama"></button>
+<button class="hotspot" data-id="dresser" data-label="Cômoda" aria-label="Investigar cômoda"></button>
+<button class="hotspot" data-id="notebook" data-label="Caderno" aria-label="Abrir caderno"></button>
+<button class="hotspot" data-id="radio" data-label="Rádio" aria-label="Abrir rádio"></button>
+</div><div class="scene-caption"><span>Uma noite tranquila</span><span>Toque nos pontos de luz para explorar</span></div></div></section>
 <aside class="side">
 <section class="card"><h2>INVENTÁRIO</h2><div class="inventory" id="inventory"><span class="muted">Vazio</span></div><p class="muted" id="selection">Nenhum item selecionado.</p></section>
 <section class="card"><h2>REGISTRO</h2><div class="muted" id="status" aria-live="polite">Itens e pistas encontrados.</div><div class="progress"><span id="progress"></span></div></section>
 <section class="card wide"><h2>ACESSO RÁPIDO</h2><div class="actions"><button id="openPoems">Poemas</button><button id="openRadio">Rádio</button><button id="openCase">Arquivo dos Caçadores</button><button id="openScrap">Scrapbook</button><button id="reset">Reiniciar</button></div></section>
 </aside></div></main>
 <section class="overlay" id="poemsPanel" hidden><div class="dialog" role="dialog" aria-modal="true" aria-labelledby="poemHeading"><header class="dialoghead"><h2 id="poemHeading">CADERNO</h2><button class="close" data-close aria-label="Fechar">×</button></header><nav class="poem-tabs" id="poemTabs"></nav><article class="poem" id="poemText">Selecione um poema.</article></div></section>
-<section class="overlay" id="radioPanel" hidden><div class="dialog" role="dialog" aria-modal="true" aria-labelledby="radioHeading"><header class="dialoghead"><h2 id="radioHeading">RÁDIO</h2><button class="close" data-close aria-label="Fechar">×</button></header><p class="muted">Escolha uma faixa para abrir a busca correspondente no YouTube.</p><div class="track-list" id="trackList"></div><p><a class="external" id="youtubeLink" target="_blank" rel="noopener noreferrer">Abrir faixa selecionada ↗</a></p></div></section>
+<section class="overlay" id="radioPanel" hidden><div class="dialog" role="dialog" aria-modal="true" aria-labelledby="radioHeading"><header class="dialoghead"><h2 id="radioHeading">RÁDIO · SELEÇÃO MUSICAL</h2><button class="close" data-close aria-label="Fechar">×</button></header><div class="track-list" id="trackList"></div><div class="player-shell"><div class="player-meta"><span id="nowPlaying">Nenhuma faixa selecionada</span><span>YOUTUBE PLAYER</span></div><div class="player-frame" id="playerFrame"><div style="height:100%;display:grid;place-items:center;color:#b7a9a2;font:11px system-ui;letter-spacing:.12em">ESCOLHA UMA FAIXA PARA OUVIR</div></div><p class="player-note">A reprodução acontece aqui no quarto, pelo player oficial do YouTube. Toque em uma faixa para começar.</p></div></div></section>
 <section class="overlay" id="casePanel" hidden><div class="dialog" role="dialog" aria-modal="true" aria-labelledby="caseHeading"><header class="dialoghead"><h2 id="caseHeading">ARQUIVO DOS CAÇADORES</h2><button class="close" data-close aria-label="Fechar">×</button></header><p>Um ruído aparece sempre que a luz da janela pisca. Examine as evidências e selecione uma hipótese.</p><div class="case-grid" id="caseClues"><button class="clue" data-clue="sound">Gravação: três notas baixas, pausa, uma nota aguda.</button><button class="clue" data-clue="weather">Janela: vibração sincronizada com as rajadas de vento.</button><button class="clue" data-clue="dust">Estante: poeira intacta, nenhum sinal de passagem.</button><button class="clue" data-clue="radio">Rádio: o ruído surge mesmo desligado.</button></div><div class="result"><strong>Hipótese</strong><div class="scrap-tools"><button data-theory="ghost">Presença no quarto</button><button data-theory="wind">Ressonância causada pelo vento</button><button data-theory="radio">Interferência do rádio</button></div><p id="caseResult" class="muted" aria-live="polite">Selecione evidências e compare as hipóteses.</p></div></div></section>
 <section class="overlay" id="scrapPanel" hidden><div class="dialog" role="dialog" aria-modal="true" aria-labelledby="scrapHeading"><header class="dialoghead"><h2 id="scrapHeading">SCRAPBOOK DA KÁSSIA</h2><button class="close" data-close aria-label="Fechar">×</button></header><p>Monte uma página com recortes. Toque em uma peça para adicioná-la ou removê-la.</p><div class="scrap-tools" id="scrapTools"><button data-piece="✿ flor">Flor</button><button data-piece="☾ lua">Lua</button><button data-piece="♫ música">Música</button><button data-piece="✦ estrela">Estrela</button><button data-piece="♡ coração">Coração</button><button data-piece="❀ folha">Folha</button></div><div class="scrap" id="scrapBoard" aria-label="Página do scrapbook"><span class="muted">Sua página começa aqui.</span></div><div class="scrap-tools"><button id="clearScrap">Limpar página</button><button id="finishScrap">Guardar composição</button></div><p id="scrapResult" class="muted" aria-live="polite"></p></div></section>
 <script>
 "use strict";
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
-const songs=["Final Duet — OMORI","Blue Hair — TV Girl","Great Fairy Fountain — Zelda","Stairway to Heaven — Led Zeppelin","Cotidiano — Chico Buarque","Heart to Heart — Mac DeMarco"];
+const songs=[{title:"Final Duet",artist:"OMORI",id:"FHINYUEBD1A"},{title:"Blue Hair",artist:"TV Girl",id:"PzIXNqpCug0"},{title:"Great Fairy Fountain",artist:"The Legend of Zelda",id:"IrCGpPZ8CCE"},{title:"Stairway to Heaven",artist:"Led Zeppelin",id:"Ly6ZhQVnVow"},{title:"Cotidiano",artist:"Chico Buarque",id:"dHYOVuq_Fco"},{title:"Heart to Heart",artist:"Mac DeMarco",id:"qBoQzo98EpQ"}];
 const poems=[
 {title:"O Azul Que Restou em Mim",key:"4"},
 {title:"O Que Fica de Nós",key:"5"},
@@ -58,7 +109,7 @@ const itemData={flower:["Flor","✿"],key:["Chave","🗝"],note:["Bilhete","✉"
 let poemData={},inventory=[],selected=null,found=new Set(),caseClues=new Set(),scrapPieces=[];
 function status(t){$("#status").textContent=t}
 function show(id){$("#"+id).hidden=false}
-function closeAll(){$$(".overlay").forEach(x=>x.hidden=true)}
+function closeAll(){$(".overlay").forEach(x=>x.hidden=true);const frame=$("#playerFrame");if(frame)frame.replaceChildren()}
 function updateInventory(){const el=$("#inventory");el.replaceChildren();if(!inventory.length){const s=document.createElement("span");s.className="muted";s.textContent="Vazio";el.append(s)}inventory.forEach(id=>{const b=document.createElement("button");b.className="item";b.setAttribute("aria-pressed",String(selected===id));const i=document.createElement("span"),n=document.createElement("span");i.className="ico";i.textContent=itemData[id][1];n.textContent=itemData[id][0];b.append(i,n);b.onclick=()=>{selected=selected===id?null:id;updateInventory();$("#selection").textContent=selected?"Selecionado: "+itemData[selected][0]:"Nenhum item selecionado."};el.append(b)})}
 function addItem(id){if(!inventory.includes(id)){inventory.push(id);updateInventory();status("Novo item: "+itemData[id][0])}}
 function removeItem(id){inventory=inventory.filter(x=>x!==id);if(selected===id)selected=null;updateInventory()}
@@ -75,7 +126,7 @@ if(id==="radio"){openRadio()}
 $$("[data-id]").forEach(b=>b.addEventListener("click",()=>investigate(b.dataset.id)));
 function openPoems(){const nav=$("#poemTabs");nav.replaceChildren();poems.forEach((p,i)=>{const b=document.createElement("button");b.textContent=p.title;b.onclick=()=>renderPoem(i);nav.append(b)});renderPoem(0);show("poemsPanel")}
 function renderPoem(i){const p=poems[i],el=$("#poemText");el.replaceChildren();const h=document.createElement("h3");h.textContent=p.title;el.append(h);const t=poemData[p.key]?.text||"Texto não disponível.";el.append(document.createTextNode(t))}
-function openRadio(){const list=$("#trackList");list.replaceChildren();songs.forEach((s,i)=>{const b=document.createElement("button");b.textContent=s;b.onclick=()=>{const q=encodeURIComponent(s+" official audio");$("#youtubeLink").href="https://www.youtube.com/results?search_query="+q;$("#youtubeLink").textContent="Abrir "+s+" ↗";$$(".track-list button").forEach(x=>x.setAttribute("aria-pressed","false"));b.setAttribute("aria-pressed","true")};list.append(b)});list.firstElementChild?.click();show("radioPanel")}
+let activeTrack=-1;function selectTrack(i,autoplay=true){activeTrack=i;const track=songs[i];$(".track-list button").forEach((b,n)=>b.setAttribute("aria-pressed",String(n===i)));$("#nowPlaying").textContent=track.title+" · "+track.artist;const frame=document.createElement("iframe");frame.title="Reproduzindo "+track.title+" — "+track.artist;frame.allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";frame.allowFullscreen=true;frame.referrerPolicy="strict-origin-when-cross-origin";frame.src="https://www.youtube-nocookie.com/embed/"+track.id+"?autoplay="+(autoplay?"1":"0")+"&playsinline=1&rel=0&modestbranding=1";$("#playerFrame").replaceChildren(frame)}function openRadio(){const list=$("#trackList");list.replaceChildren();songs.forEach((s,i)=>{const b=document.createElement("button");b.textContent=s.title+" · "+s.artist;b.setAttribute("aria-pressed",String(i===activeTrack));b.onclick=()=>selectTrack(i,true);list.append(b)});show("radioPanel");if(activeTrack>=0)selectTrack(activeTrack,false)}
 $("#openPoems").onclick=openPoems;$("#openRadio").onclick=openRadio;
 $("#openCase").onclick=()=>show("casePanel");$("#openScrap").onclick=()=>show("scrapPanel");
 $$("[data-close]").forEach(b=>b.onclick=closeAll);$$(".overlay").forEach(p=>p.addEventListener("click",e=>{if(e.target===p)closeAll()}));
