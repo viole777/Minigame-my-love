@@ -29,6 +29,9 @@ jobs:
         with:
           enablement: true
 
+      - name: Generate PNG game assets
+        run: python3 scripts/generate_assets.py
+
       - name: Upload static site
         uses: actions/upload-pages-artifact@v3
         with:
