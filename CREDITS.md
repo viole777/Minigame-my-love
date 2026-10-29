@@ -1,26 +1,15 @@
 # Créditos e licenças
 
-## Arte original deste projeto
+## Cenário
 
-Todos os PNGs são gerados por `scripts/generate_assets.py`, escrito para este repositório e usando apenas Python padrão. O script escreve os pixels diretamente em buffers raster com uma paleta limitada; não usa SVG, emojis, gradientes CSS nem assets de jogos comerciais.
+O cenário atual é uma composição ilustrada em CSS criada para este projeto. Não usa spritesheets, personagens ou arte pixelada de jogos comerciais. Os objetos interativos são elementos HTML sobrepostos ao cenário.
 
-- `assets/room.png` — quarto completo 320×240, piso de madeira, parede padronizada, cama, armário, estante, escrivaninha, rádio e pequenos objetos.
-- `assets/mio.png` — spritesheet original de personagem 16×24, 3 frames por 4 direções.
-- `assets/rain.png` — quatro frames de chuva.
-- `assets/inventory.png` — ícones pixelados do inventário.
+## Música
 
-Esses PNGs são arte original placeholder, não sprites profissionais ou assets de pacotes externos. Não foram copiados tiles, sprites, personagens, cenas ou logos do Undertale, Supernatural ou outras franquias. Referências de estilo serviram apenas como guia de composição.
+A interface usa a YouTube IFrame Player API para reproduzir a lista definida em MUSICAS.md. Os vídeos são carregados pelo YouTube; disponibilidade, bloqueios regionais e reprodução em segundo plano dependem da plataforma.
 
-## Dependência externa
+Documentação: https://developers.google.com/youtube/iframe_api_reference
 
-- YouTube IFrame Player API — carregada em runtime para a reprodução de músicas. Documentação: https://developers.google.com/youtube/iframe_api_reference
+## Poemas
 
-## Licença
-
-A arte original gerada por este projeto pode ser reutilizada com atribuição ao repositório. Nenhum pacote externo CC0 foi incorporado; portanto, não há atribuições de terceiros a declarar.
-
-
-## Pacote externo incorporado
-
-- Kenney — **Roguelike Indoor pack**, spritesheet de móveis e interiores, obtido via OpenGameArt. Licença **CC0**. A atribuição não é obrigatória; crédito incluído por cortesia. Fonte: https://opengameart.org/content/roguelike-indoor-pack
-- O workflow de publicação baixa o ZIP original e extrai os arquivos em `assets/kenney-indoor/`. A cena continua tendo fallback raster próprio para não ficar preta se a origem externa estiver indisponível.
+Os poemas em content/poems/poems.json são conteúdo do projeto. Os três primeiros poemas aguardam os textos originais e não são recriados ou substituídos por conteúdo inventado.
