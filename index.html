@@ -45,9 +45,9 @@ bg.src="assets/room.png";mio.src="assets/mio.png";rain.src="assets/rain.png";ico
 const player={x:159,y:166,dir:0,frame:0,walk:0,speed:1.25};
 const keys=new Set();let target=null,modal="",weather=0,weatherFrame=0,clock=0,paused=false,selected=null,inventory=[],invStart=0,near=null,hintTarget=null;
 const objectList=[
- {id:"window",x:22,y:15,w:68,h:49,tx:55,ty:88},
+ {id:"window",x:22,y:15,w:68,h:49,tx:55,ty:94},
  {id:"shelf",x:7,y:75,w:46,h:42,tx:57,ty:121},
- {id:"wardrobe",x:92,y:11,w:52,h:63,tx:148,ty:89},
+ {id:"wardrobe",x:92,y:11,w:52,h:63,tx:148,ty:94},
  {id:"desk",x:66,y:76,w:55,h:45,tx:126,ty:124},
  {id:"bed",x:208,y:76,w:101,h:76,tx:199,ty:158},
  {id:"radio",x:247,y:157,w:47,h:27,tx:239,ty:184},
@@ -86,7 +86,7 @@ let pendingRadioStart=false;function startRadio(){if(radioStarted)return;if(!ytR
 function toggleSound(){if(!ytReady){pendingRadioStart=true;muted=!muted;playerState();return;}if(!radioStarted){startRadio();return;}muted=!muted;if(muted)yt.mute();else{yt.unMute();if(!paused)yt.playVideo();}playerState();}
 function renderTracks(){const list=$("#trackList");list.replaceChildren();tracks.forEach((t,i)=>{const b=document.createElement("button");b.type="button";b.textContent=t.title;b.setAttribute("aria-pressed",String(i===trackIndex));b.onclick=()=>{trackIndex=i;radioStarted=true;muted=false;paused=false;if(ytReady){yt.unMute();yt.setVolume(35);yt.loadVideoById(t.id);}playerState();renderTracks();};list.append(b);});}
 function addItem(id){if(found.has(id)||inventory.includes(id))return;found.add(id);inventory.push(id);renderInventory();}
-function renderInventory(){const slots=$$(".slot");slots.forEach((b,i)=>{b.replaceChildren();const id=inventory[invStart+i];b.setAttribute("aria-pressed",String(id===selected));if(id){const im=document.createElement("img");im.src="assets/inventory.png";im.alt="";im.style.objectPosition="0 0";im.style.objectFit="none";im.style.width="32px";im.style.height="32px";im.style.imageRendering="pixelated";const data=itemData[id];im.style.objectPosition=(-((data?.icon||0)%3)*16)+"px "+(-Math.floor((data?.icon||0)/3)*16)+"px";b.append(im);const label=document.createElement("span");label.textContent=data?.label||"✦";b.append(label);}});}
+function renderInventory(){const slots=$$(".slot");slots.forEach((b,i)=>{b.replaceChildren();const id=inventory[invStart+i];b.setAttribute("aria-pressed",String(id===selected));if(id){const im=document.createElement("img");im.src="assets/inventory.png";im.alt="";im.style.objectPosition="0 0";im.style.objectFit="none";im.style.width="16px";im.style.height="16px";im.style.imageRendering="pixelated";const data=itemData[id];im.style.objectPosition=(-((data?.icon||0)%3)*16)+"px "+(-Math.floor((data?.icon||0)/3)*16)+"px";b.append(im);const label=document.createElement("span");label.textContent=data?.label||"✦";b.append(label);}});}
 function inventoryHas(id){return inventory.includes(id);}
 function consume(id){inventory=inventory.filter(x=>x!==id);if(selected===id)selected=null;renderInventory();}
 function openPanel(id){modal=id;target=null;$("#"+id).hidden=false;$("#game").blur();}
