@@ -47,7 +47,7 @@ jobs:
           assert.match(html, /YT\.PlayerState\.ENDED/, 'Playlist must advance on ENDED');
           assert.match(html, /onError/, 'YouTube errors must be handled');
           assert.match(html, /prefers-reduced-motion/, 'Reduced motion support missing');
-          assert.match(html, /data-move=/, 'Touch D-pad missing');
+          assert.match(html, /id="joystick"/, 'Touch joystick missing');
           assert.doesNotMatch(html, /<svg\b|background-image:\s*linear-gradient/i, 'Scene must not use vector SVG or CSS gradients');
           const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map(m => m[1]);
           assert.equal(ids.length, new Set(ids).size, 'Duplicate HTML id');
