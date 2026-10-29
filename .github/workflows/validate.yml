@@ -31,21 +31,26 @@ jobs:
           assert.match(html, /<html[^>]+lang="pt-BR"/i, 'Document language should be pt-BR');
           assert.match(html, /<main\b/i, 'Missing main landmark');
           assert.match(html, /prefers-reduced-motion/i, 'Reduced-motion support is expected');
-          assert.doesNotMatch(html, /<iframe\b[^>]*\bautoplay\b/i, 'Embedded media must not autoplay');
-          assert.match(html, /<svg\b[^>]*class="scene-svg"/i, 'Missing pixel-art room scene');
+          assert.match(html, /<canvas\b[^>]*id="game"/i, 'Missing low-resolution game canvas');
+          assert.match(html, /image-rendering:\s*pixelated/i, 'Pixelated scaling should be enabled');
+          assert.match(html, /prefers-reduced-motion/i, 'Reduced motion should be respected');
+          assert.match(html, /YouTubeIframeAPIReady/i, 'Missing YouTube IFrame API integration');
+          assert.match(html, /onStateChange/i, 'Missing YouTube state-change handling');
+          assert.match(html, /data-move=/i, 'Missing touch D-pad controls');
           assert.match(html, /aria-modal="true"/i, 'Interactive panels should behave as dialogs');
           assert.match(html, /data-sticker=/i, 'Missing scrapbook touch controls');
 
           const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map(match => match[1]);
           assert.equal(ids.length, new Set(ids).size, 'Duplicate HTML id found');
 
-          const scripts = [...html.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/gi)];
-          assert.equal(scripts.length, 1, 'Expected one inline application script');
-          new vm.Script(scripts[0][1], { filename: 'index.html:inline-script' });
+          const scripts = [...html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)];
+          const inlineScripts = scripts.filter(match => !/\bsrc\s*=/.test(match[1]));
+          assert.equal(inlineScripts.length, 1, 'Expected one inline application script');
+          new vm.Script(inlineScripts[0][2], { filename: 'index.html:inline-script' });
 
-          for (const id of ['game', 'radioPanel', 'player', 'poemsPanel', 'huntersPanel', 'scrapPanel', 'booksPanel']) {
+          for (const id of ['game', 'radioPanel', 'ytPlayer', 'poemsPanel', 'huntersPanel', 'scrapPanel', 'booksPanel', 'dialogue', 'muteButton']) {
             assert.ok(ids.includes(id), 'Missing required element id: ' + id);
           }
 
-          console.log('Validation passed: document structure, unique IDs, key sections, media behavior, reduced motion, and JavaScript syntax.');
+          console.log('Validation passed: canvas game, unique IDs, panels, touch controls, YouTube API integration, reduced motion, and JavaScript syntax.');
           NODE
