@@ -5,28 +5,28 @@
 <meta name="theme-color" content="#17131d"><meta name="description" content="Um quarto ilustrado com poemas, música e pequenos jogos de observação.">
 <title>Cantinho da Mio</title>
 <style>
-:root{color-scheme:dark;--ink:#eee4d8;--muted:#b7a9a2;--night:#17151b;--plum:#29232d;--plum2:#352a35;--rose:#c79a9b;--brass:#d7bd91;--edge:#66515a;--serif:Georgia,"Times New Roman",serif;--sans:system-ui,-apple-system,"Segoe UI",sans-serif}
-*{box-sizing:border-box}html{background:var(--night);scroll-behavior:smooth}body{margin:0;min-height:100vh;color:var(--ink);font:15px/1.55 var(--serif);background:radial-gradient(ellipse at 48% -20%,#51404a 0,#28232d 38%,#17151b 78%);background-attachment:fixed}
+:root{color-scheme:dark;--ink:#eee4d8;--muted:#b7a9a2;--night:#211b20;--plum:#3a2d32;--plum2:#514047;--rose:#d8aaa0;--brass:#e6c99b;--edge:#80636a;--serif:Georgia,"Times New Roman",serif;--sans:system-ui,-apple-system,"Segoe UI",sans-serif}
+*{box-sizing:border-box}html{background:var(--night);scroll-behavior:smooth}body{margin:0;min-height:100vh;color:var(--ink);font:15px/1.55 var(--serif);background:radial-gradient(ellipse at 50% 0%,#78606a 0,#46363f 42%,#211b20 100%);background-attachment:fixed}
 button{font:inherit;color:inherit;cursor:pointer;touch-action:manipulation}button:focus-visible,a:focus-visible{outline:2px solid var(--brass);outline-offset:4px}
 .app{width:min(1320px,100%);margin:auto;padding:26px clamp(14px,3vw,38px) 38px}
 .top{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:0 3px 18px;margin-bottom:18px;border-bottom:1px solid #8c74734d}
 .brand{display:flex;align-items:center;gap:13px;color:#f0d7c3;font:600 11px/1.3 var(--sans);letter-spacing:.28em;text-transform:uppercase}
 .brand:before{content:"";width:30px;height:1px;background:var(--brass)}
 .hintline{font:11px var(--sans);letter-spacing:.12em;text-transform:uppercase;color:#c6b5ad}
-.layout{display:grid;grid-template-columns:minmax(0,1fr) 286px;gap:22px;align-items:start}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:18px;align-items:start}
 .frame{position:relative;padding:9px;background:linear-gradient(135deg,#a8897b,#4d3b48 35%,#2b2631 75%);border:1px solid #c3a48c55;box-shadow:0 25px 70px #09070bb8,0 2px 0 #f1d7b133 inset}
-.scene{position:relative;overflow:hidden;aspect-ratio:4/3;background:#333044}
-.scene>img{display:block;width:100%;height:100%;object-fit:cover;filter:saturate(.88) contrast(1.03)}
+.scene{position:relative;overflow:hidden;aspect-ratio:5/4;background:#333044}
+.scene>img{display:block;width:100%;height:100%;object-fit:cover;filter:saturate(1.04) contrast(1.01) brightness(1.08)}
 .scene:after{content:"";position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 0 90px #15111a70,inset 0 0 0 1px #f2d6b31f}
 .hotspot{position:absolute;z-index:1;display:grid;place-items:center;width:25px;height:25px;padding:0;border:1px solid #f3ddc4b8;border-radius:50%;background:#2a2330b8;color:#f7e5cf;font:0 var(--sans);box-shadow:0 0 0 5px #241d2b30,0 0 18px #f1d1a666;backdrop-filter:blur(3px);transition:transform .2s,background .2s}
 .hotspot:before{content:"";width:5px;height:5px;border-radius:50%;background:var(--brass)}
 .hotspot:after{content:attr(data-label);position:absolute;left:31px;top:50%;transform:translateY(-50%);white-space:nowrap;padding:5px 9px;background:#211b25e8;border:1px solid #b99b8870;color:#f3e5d8;font:10px var(--sans);letter-spacing:.09em;text-transform:uppercase;opacity:0;pointer-events:none;transition:opacity .2s}
 .hotspot:hover,.hotspot:focus-visible{transform:scale(1.16);background:#7c5966}
 .hotspot:hover:after,.hotspot:focus-visible:after{opacity:1}
-.hotspot[data-id=window]{left:23%;top:32%}.hotspot[data-id=shelf]{left:19%;top:72%}.hotspot[data-id=desk]{left:45%;top:59%}.hotspot[data-id=bed]{right:28%;bottom:20%}.hotspot[data-id=dresser]{right:18%;top:43%}.hotspot[data-id=radio]{left:53%;top:54%}.hotspot[data-id=notebook]{left:45%;top:52%}
+.hotspot[data-id=window]{left:23%;top:32%}.hotspot[data-id=shelf]{left:19%;top:72%}.hotspot[data-id=desk]{left:45%;top:59%}.hotspot[data-id=bed]{right:28%;bottom:20%}.hotspot[data-id=dresser]{right:18%;top:43%}.hotspot[data-id=radio]{left:53%;top:54%}.hotspot[data-id=notebook]{left:45%;top:52%}.hotspot[data-id=letter]{left:49%;top:56%}
 .scene-caption{display:flex;justify-content:space-between;gap:12px;padding:11px 4px 1px;color:#c9b7ad;font:10px var(--sans);letter-spacing:.12em;text-transform:uppercase}
 .side{display:grid;gap:13px}
-.card{padding:17px 17px 16px;background:linear-gradient(145deg,#342b36eF,#211e27f2);border:1px solid #a9898450;box-shadow:0 12px 35px #0c091044,inset 0 1px #f5d8c91a}
+.card{padding:17px 17px 16px;background:linear-gradient(145deg,#493840f2,#30252df5);border:1px solid #a9898450;box-shadow:0 12px 35px #0c091044,inset 0 1px #f5d8c91a}
 h2{margin:0 0 13px;color:#e5c8b4;font:600 10px var(--sans);letter-spacing:.22em;text-transform:uppercase}
 .inventory{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
 .item{display:flex;align-items:center;gap:8px;min-height:43px;padding:7px 9px;border:1px solid #735d655e;background:#211c25;font:11px var(--sans);text-align:left;transition:border-color .2s,background .2s}
@@ -38,9 +38,9 @@ h2{margin:0 0 13px;color:#e5c8b4;font:600 10px var(--sans);letter-spacing:.22em;
 .actions button{min-height:39px;padding:8px;border:1px solid #82666b66;background:#251f29;color:#e7d6ca;text-align:left;font:10px var(--sans);letter-spacing:.02em;transition:background .2s,border-color .2s}
 .actions button:hover{background:#4b3944;border-color:#b18d83}
 .actions button:last-child{grid-column:1/-1;text-align:center;color:#c6b5ad}
-.overlay{position:fixed;z-index:10;inset:0;display:grid;place-items:center;padding:18px;background:#0d0b10eF;backdrop-filter:blur(9px)}
+.overlay{position:fixed;z-index:10;inset:0;display:grid;place-items:center;padding:18px;background:#171117d9;backdrop-filter:blur(9px)}
 .overlay[hidden]{display:none}
-.dialog{width:min(720px,100%);max-height:min(91svh,920px);overflow:auto;padding:clamp(18px,3vw,30px);background:linear-gradient(145deg,#382e39,#211d27);border:1px solid #b18c866e;box-shadow:0 30px 100px #000b,0 1px #f7ddc51c inset}
+.dialog{width:min(720px,100%);max-height:min(91svh,920px);overflow:auto;padding:clamp(18px,3vw,30px);background:linear-gradient(145deg,#514047,#30262d);border:1px solid #b18c866e;box-shadow:0 30px 100px #000b,0 1px #f7ddc51c inset}
 .dialoghead{display:flex;align-items:center;gap:12px;padding-bottom:15px;margin-bottom:16px;border-bottom:1px solid #98777a4d}
 .dialoghead h2{margin:0 auto 0 0;font-size:11px;letter-spacing:.24em}
 .close{width:38px;height:38px;padding:0;border:1px solid #84676c;background:transparent;color:#e6d2c4;font:23px var(--sans)}
@@ -74,7 +74,7 @@ h2{margin:0 0 13px;color:#e5c8b4;font:600 10px var(--sans);letter-spacing:.22em;
 </style>
 </head>
 <body><main class="app">
-<header class="top"><div class="brand">Cantinho da Mio</div><div class="hintline">Quarto · Caderno · Rádio</div></header>
+<header class="top"><div class="brand">Cantinho da Mio</div><div class="hintline">Um lugar para descansar · explorar · ficar</div></header>
 <div class="layout">
 <section><div class="frame"><div class="scene" aria-label="Quarto ilustrado interativo">
 <img src="assets/quarto-ilustrado.svg" alt="Quarto aconchegante à noite, com janela, estante, escrivaninha, cama e cômoda">
@@ -83,16 +83,16 @@ h2{margin:0 0 13px;color:#e5c8b4;font:600 10px var(--sans);letter-spacing:.22em;
 <button class="hotspot" data-id="desk" data-label="Mesa" aria-label="Abrir escrivaninha"></button>
 <button class="hotspot" data-id="bed" data-label="Cama" aria-label="Investigar cama"></button>
 <button class="hotspot" data-id="dresser" data-label="Cômoda" aria-label="Investigar cômoda"></button>
-<button class="hotspot" data-id="notebook" data-label="Caderno" aria-label="Abrir caderno"></button>
+<button class="hotspot" data-id="notebook" data-label="Caderno" aria-label="Abrir caderno"></button><button class="hotspot" data-id="letter" data-label="Bilhete" aria-label="Ler bilhete"></button>
 <button class="hotspot" data-id="radio" data-label="Rádio" aria-label="Abrir rádio"></button>
-</div><div class="scene-caption"><span>Uma noite tranquila</span><span>Toque nos pontos de luz para explorar</span></div></div></section>
+</div><div class="scene-caption"><span>Uma noite tranquila</span><span>Fique à vontade. Tem pequenos segredos por aqui.</span></div></div></section>
 <aside class="side">
 <section class="card"><h2>INVENTÁRIO</h2><div class="inventory" id="inventory"><span class="muted">Vazio</span></div><p class="muted" id="selection">Nenhum item selecionado.</p></section>
 <section class="card"><h2>REGISTRO</h2><div class="muted" id="status" aria-live="polite">Itens e pistas encontrados.</div><div class="progress"><span id="progress"></span></div></section>
 <section class="card wide"><h2>ACESSO RÁPIDO</h2><div class="actions"><button id="openPoems">Poemas</button><button id="openRadio">Rádio</button><button id="openCase">Arquivo dos Caçadores</button><button id="openScrap">Scrapbook</button><button id="reset">Reiniciar</button></div></section>
 </aside></div></main>
 <section class="overlay" id="poemsPanel" hidden><div class="dialog" role="dialog" aria-modal="true" aria-labelledby="poemHeading"><header class="dialoghead"><h2 id="poemHeading">CADERNO</h2><button class="close" data-close aria-label="Fechar">×</button></header><nav class="poem-tabs" id="poemTabs"></nav><article class="poem" id="poemText">Selecione um poema.</article></div></section>
-<section class="overlay" id="radioPanel" hidden><div class="dialog" role="dialog" aria-modal="true" aria-labelledby="radioHeading"><header class="dialoghead"><h2 id="radioHeading">RÁDIO · SELEÇÃO MUSICAL</h2><button class="close" data-close aria-label="Fechar">×</button></header><div class="track-list" id="trackList"></div><div class="player-shell"><div class="player-meta"><span id="nowPlaying">Nenhuma faixa selecionada</span><span>YOUTUBE PLAYER</span></div><div class="player-frame" id="playerFrame"><div style="height:100%;display:grid;place-items:center;color:#b7a9a2;font:11px system-ui;letter-spacing:.12em">ESCOLHA UMA FAIXA PARA OUVIR</div></div><p class="player-note">A reprodução acontece aqui no quarto, pelo player oficial do YouTube. Toque em uma faixa para começar.</p></div></div></section>
+<section class="overlay" id="notePanel" hidden><div class="dialog" role="dialog" aria-modal="true" aria-labelledby="noteHeading"><header class="dialoghead"><h2 id="noteHeading">UM BILHETE</h2><button class="close" data-close aria-label="Fechar">×</button></header><article class="poem" style="background:#e8d8c4;color:#514047;border-color:#c3a58d">Para quando você quiser ficar um pouquinho.<br><br>Não precisa descobrir nada, nem terminar nada. Pode só escolher uma música, abrir o caderno, olhar a chuva e descansar.<br><br>Deixei esse cantinho preparado com carinho. Espero que ele pareça um abraço em forma de quarto.<br><br>— Mio</article></div></section>\n<section class="overlay" id="radioPanel" hidden><div class="dialog" role="dialog" aria-modal="true" aria-labelledby="radioHeading"><header class="dialoghead"><h2 id="radioHeading">RÁDIO · SELEÇÃO MUSICAL</h2><button class="close" data-close aria-label="Fechar">×</button></header><div class="track-list" id="trackList"></div><div class="player-shell"><div class="player-meta"><span id="nowPlaying">Nenhuma faixa selecionada</span><span>YOUTUBE PLAYER</span></div><div class="player-frame" id="playerFrame"><div style="height:100%;display:grid;place-items:center;color:#b7a9a2;font:11px system-ui;letter-spacing:.12em">ESCOLHA UMA FAIXA PARA OUVIR</div></div><p class="player-note">A reprodução acontece aqui no quarto, pelo player oficial do YouTube. Toque em uma faixa para começar.</p></div></div></section>
 <section class="overlay" id="casePanel" hidden><div class="dialog" role="dialog" aria-modal="true" aria-labelledby="caseHeading"><header class="dialoghead"><h2 id="caseHeading">ARQUIVO DOS CAÇADORES</h2><button class="close" data-close aria-label="Fechar">×</button></header><p>Um ruído aparece sempre que a luz da janela pisca. Examine as evidências e selecione uma hipótese.</p><div class="case-grid" id="caseClues"><button class="clue" data-clue="sound">Gravação: três notas baixas, pausa, uma nota aguda.</button><button class="clue" data-clue="weather">Janela: vibração sincronizada com as rajadas de vento.</button><button class="clue" data-clue="dust">Estante: poeira intacta, nenhum sinal de passagem.</button><button class="clue" data-clue="radio">Rádio: o ruído surge mesmo desligado.</button></div><div class="result"><strong>Hipótese</strong><div class="scrap-tools"><button data-theory="ghost">Presença no quarto</button><button data-theory="wind">Ressonância causada pelo vento</button><button data-theory="radio">Interferência do rádio</button></div><p id="caseResult" class="muted" aria-live="polite">Selecione evidências e compare as hipóteses.</p></div></div></section>
 <section class="overlay" id="scrapPanel" hidden><div class="dialog" role="dialog" aria-modal="true" aria-labelledby="scrapHeading"><header class="dialoghead"><h2 id="scrapHeading">SCRAPBOOK DA KÁSSIA</h2><button class="close" data-close aria-label="Fechar">×</button></header><p>Monte uma página com recortes. Toque em uma peça para adicioná-la ou removê-la.</p><div class="scrap-tools" id="scrapTools"><button data-piece="✿ flor">Flor</button><button data-piece="☾ lua">Lua</button><button data-piece="♫ música">Música</button><button data-piece="✦ estrela">Estrela</button><button data-piece="♡ coração">Coração</button><button data-piece="❀ folha">Folha</button></div><div class="scrap" id="scrapBoard" aria-label="Página do scrapbook"><span class="muted">Sua página começa aqui.</span></div><div class="scrap-tools"><button id="clearScrap">Limpar página</button><button id="finishScrap">Guardar composição</button></div><p id="scrapResult" class="muted" aria-live="polite"></p></div></section>
 <script>
@@ -109,27 +109,27 @@ const itemData={flower:["Flor","✿"],key:["Chave","🗝"],note:["Bilhete","✉"
 let poemData={},inventory=[],selected=null,found=new Set(),caseClues=new Set(),scrapPieces=[];
 function status(t){$("#status").textContent=t}
 function show(id){$("#"+id).hidden=false}
-function closeAll(){$(".overlay").forEach(x=>x.hidden=true);const frame=$("#playerFrame");if(frame)frame.replaceChildren()}
+function closeAll(){$(".overlay").forEach(x=>x.hidden=true);const frame=$("#playerFrame");if(frame){frame.replaceChildren();const msg=document.createElement("div");msg.className="player-placeholder";msg.textContent="ESCOLHA UMA FAIXA PARA OUVIR";frame.append(msg)}activeTrack=-1;$("#nowPlaying").textContent="Nenhuma faixa selecionada"}
 function updateInventory(){const el=$("#inventory");el.replaceChildren();if(!inventory.length){const s=document.createElement("span");s.className="muted";s.textContent="Vazio";el.append(s)}inventory.forEach(id=>{const b=document.createElement("button");b.className="item";b.setAttribute("aria-pressed",String(selected===id));const i=document.createElement("span"),n=document.createElement("span");i.className="ico";i.textContent=itemData[id][1];n.textContent=itemData[id][0];b.append(i,n);b.onclick=()=>{selected=selected===id?null:id;updateInventory();$("#selection").textContent=selected?"Selecionado: "+itemData[selected][0]:"Nenhum item selecionado."};el.append(b)})}
 function addItem(id){if(!inventory.includes(id)){inventory.push(id);updateInventory();status("Novo item: "+itemData[id][0])}}
 function removeItem(id){inventory=inventory.filter(x=>x!==id);if(selected===id)selected=null;updateInventory()}
 function mark(id){found.add(id);$("#progress").style.width=(found.size/6*100)+"%"}
 function investigate(id){
-if(id==="window"){if(!found.has("window")){mark("window");addItem("flower");status("Uma flor prensada estava no parapeito.")}else status("A chuva escorre pelo vidro.")}
-if(id==="bed"){if(!found.has("bed")){mark("bed");addItem("key");status("Uma chave estava entre as dobras do cobertor.")}else if(selected==="flower"){removeItem("flower");mark("flower-bed");status("A flor ficou guardada entre as páginas do caderno.")}else status("O cobertor está cuidadosamente dobrado.")}
-if(id==="dresser"){if(selected==="key"){removeItem("key");addItem("cassette");mark("drawer");status("A gaveta abriu. Uma fita estava guardada ali.")}else status(inventory.includes("cassette")?"A gaveta está aberta.":"A gaveta está trancada.")}
-if(id==="shelf"){if(!found.has("shelf")){mark("shelf");addItem("note");status("Um bilhete caiu de dentro de um livro.")}else status("Os livros estão alinhados, sem mais pistas.")}
-if(id==="desk"){if(selected==="note"){removeItem("note");mark("desk-note");status("O bilhete encaixa na página solta do caderno.")}else{mark("desk");status("Papéis, recortes e uma página em branco.")} }
+if(id==="window"){mark("window");status("A chuva cai devagar lá fora. Aqui dentro está quentinho.")}
+if(id==="bed"){mark("bed");status("A cama está arrumada, com o cobertor quentinho. Pode ficar por aqui.")}
+if(id==="dresser"){mark("dresser");status("A luz da luminária deixa tudo com um tom dourado. Há pequenos objetos guardados aqui.")}
+if(id==="shelf"){mark("shelf");status("Uma estante cheia de histórias. Tem referências escondidas entre os livros.")}
+if(id==="desk"){mark("desk");status("Um cantinho para escrever, desenhar ou simplesmente deixar os pensamentos descansarem.")}
 if(id==="notebook"){openPoems()}
 if(id==="radio"){openRadio()}
 }
 $$("[data-id]").forEach(b=>b.addEventListener("click",()=>investigate(b.dataset.id)));
 function openPoems(){const nav=$("#poemTabs");nav.replaceChildren();poems.forEach((p,i)=>{const b=document.createElement("button");b.textContent=p.title;b.onclick=()=>renderPoem(i);nav.append(b)});renderPoem(0);show("poemsPanel")}
 function renderPoem(i){const p=poems[i],el=$("#poemText");el.replaceChildren();const h=document.createElement("h3");h.textContent=p.title;el.append(h);const t=poemData[p.key]?.text||"Texto não disponível.";el.append(document.createTextNode(t))}
-let activeTrack=-1;function selectTrack(i,autoplay=true){activeTrack=i;const track=songs[i];$(".track-list button").forEach((b,n)=>b.setAttribute("aria-pressed",String(n===i)));$("#nowPlaying").textContent=track.title+" · "+track.artist;const frame=document.createElement("iframe");frame.title="Reproduzindo "+track.title+" — "+track.artist;frame.allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";frame.allowFullscreen=true;frame.referrerPolicy="strict-origin-when-cross-origin";frame.src="https://www.youtube-nocookie.com/embed/"+track.id+"?autoplay="+(autoplay?"1":"0")+"&playsinline=1&rel=0&modestbranding=1";$("#playerFrame").replaceChildren(frame)}function openRadio(){const list=$("#trackList");list.replaceChildren();songs.forEach((s,i)=>{const b=document.createElement("button");b.textContent=s.title+" · "+s.artist;b.setAttribute("aria-pressed",String(i===activeTrack));b.onclick=()=>selectTrack(i,true);list.append(b)});show("radioPanel");if(activeTrack>=0)selectTrack(activeTrack,false)}
+let activeTrack=-1;function selectTrack(i,autoplay=true){activeTrack=i;const track=songs[i];$(".track-list button").forEach((b,n)=>b.setAttribute("aria-pressed",String(n===i)));$("#nowPlaying").textContent=track.title+" · "+track.artist;const frame=document.createElement("iframe");frame.title="Reproduzindo "+track.title+" — "+track.artist;frame.allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";frame.allowFullscreen=true;frame.referrerPolicy="strict-origin-when-cross-origin";frame.src="https://www.youtube.com/embed/"+track.id+"?autoplay="+(autoplay?"1":"0")+"&playsinline=1&rel=0";const fallback=document.createElement("a");fallback.href="https://www.youtube.com/watch?v="+track.id;fallback.target="_blank";fallback.rel="noopener";fallback.className="player-fallback";fallback.textContent="Se o player não carregar, abrir a faixa no YouTube ↗";$("#playerFrame").replaceChildren(frame);$("#playerFrame").after(fallback)}function openRadio(){const list=$("#trackList");list.replaceChildren();const old=$(".player-fallback");if(old)old.remove();songs.forEach((s,i)=>{const b=document.createElement("button");b.textContent=s.title+" · "+s.artist;b.setAttribute("aria-pressed",String(i===activeTrack));b.onclick=()=>selectTrack(i,true);list.append(b)});show("radioPanel");if(activeTrack>=0)selectTrack(activeTrack,false)}
 $("#openPoems").onclick=openPoems;$("#openRadio").onclick=openRadio;
 $("#openCase").onclick=()=>show("casePanel");$("#openScrap").onclick=()=>show("scrapPanel");
-$$("[data-close]").forEach(b=>b.onclick=closeAll);$$(".overlay").forEach(p=>p.addEventListener("click",e=>{if(e.target===p)closeAll()}));
+$("[data-close]").forEach(b=>b.onclick=closeAll);$(".overlay").forEach(p=>p.addEventListener("click",e=>{if(e.target===p)closeAll()}));document.addEventListener("keydown",e=>{if(e.key==="Escape")closeAll()});
 $("#caseClues").querySelectorAll("[data-clue]").forEach(b=>b.onclick=()=>{const k=b.dataset.clue;caseClues.has(k)?caseClues.delete(k):caseClues.add(k);b.setAttribute("aria-pressed",String(caseClues.has(k)));});
 $$("[data-theory]").forEach(b=>b.onclick=()=>{const t=b.dataset.theory;const enough=caseClues.has("weather")&&caseClues.has("sound");$("#caseResult").textContent=!enough?"A conclusão exige a gravação e a evidência da janela.":t==="wind"?"Hipótese consistente: as rajadas fazem a estrutura da janela vibrar; o padrão sonoro é uma ressonância, não uma presença no quarto.":t==="ghost"?"As evidências não sustentam essa hipótese: não há sinais de passagem nem atividade independente do vento.":"O rádio desligado não explica a origem do ruído; a gravação e a janela apontam para outra causa.";if(enough&&t==="wind"){mark("case");status("Arquivo dos Caçadores concluído.")}});
 function drawScrap(){const board=$("#scrapBoard");board.replaceChildren();if(!scrapPieces.length){const s=document.createElement("span");s.className="muted";s.textContent="Sua página começa aqui.";board.append(s);return}scrapPieces.forEach((p,i)=>{const s=document.createElement("span");s.className="scrap-piece";s.textContent=p+" ";const b=document.createElement("button");b.textContent="×";b.setAttribute("aria-label","Remover "+p);b.onclick=()=>{scrapPieces.splice(i,1);drawScrap()};s.append(b);board.append(s)})}
